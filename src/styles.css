@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+/* here is source from documentation admin panel */
+@import url("./assets/css/argon-dashboard.css");
+/* @import url("./assets/css/nucleo-icons.css");  */
+/* @import url("./assets/css/nucleo-svg.css"); */
+
+/* @import url("./assets/vendor/bootstrap/css/bootstrap.css"); */
+@import url("./assets/css/jquery.dataTables.css");
+@import url("./assets/vendor/animate.css/animate.min.css");
+@import url("./assets/vendor/bootstrap-icons/bootstrap-icons.css");
+@import url("./assets/vendor/swiper/swiper-bundle.min.css");
+@import url("./assets/css/style.css");
+/* @import url("~@coreui/coreui/dist/css/coreui.min.css"); */
+
+/* @import url('/node_modules/bootstrap/dist/css/bootstrap.min.css'); */
+/* @import url("./assets/css/signin.css"); */
+
+/* @import url("/node_modules/@coreui/coreui/dist/css/coreui.css"); */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

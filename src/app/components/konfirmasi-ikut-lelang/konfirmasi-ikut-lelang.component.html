@@ -1,0 +1,202 @@
+<app-navbar></app-navbar>
+<main class="">
+  <!-- ======= Intro Single ======= -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">Konfirmasi Mengikut Lelang</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="row" *ngIf="isLoggedIn == false">
+      <div
+        class="alert alert-danger text-white text-center text-lg"
+        role="alert"
+      >
+        <p>Anda diharuskan login terlebih dahulu untuk mengikuti lelang ini.</p>
+
+        <p><a routerLink="/login">Klik di sini</a> untuk login</p>
+
+        <p><a routerLink="/register">klik di sini</a> untuk mendaftar.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="property-single nav-arrow-b" *ngIf="isLoggedIn == true">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div id="property-single-carousel" class="swiper">
+            <app-carousel-detail></app-carousel-detail>
+          </div>
+          <div
+            class="property-single-carousel-pagination carousel-pagination"
+          ></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row justify-content-between">
+            <div class="col-md-5 col-lg-4">
+              <div class="property-summary">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="title-box-d section-t4">
+                      <h3 class="title-d">Data Objek Lelang</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="summary-list">
+                  <ul class="list">
+                    <li class="d-flex justify-content-between">
+                      <strong>Lot Lelang:</strong>
+                      <span>{{ detailDataAuctionObject.lotCode }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Harga Awal:</strong>
+                      <span
+                        >Rp
+                        {{
+                          detailDataAuctionObject.initialPrice | number: "1.2-2"
+                        }}</span
+                      >
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Jaminan:</strong>
+                      <span
+                        >Rp
+                        {{
+                          detailDataAuctionObject.collateralQuantity
+                            | number: "1.2-2"
+                        }}</span
+                      >
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Batas Akhir Jaminan:</strong>
+                      <span>{{
+                        detailDataAuctionObject.collateralExpire
+                          | date: "dd LLLL yyyy"
+                      }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Waktu Mulai Lelang:</strong>
+                      <span>{{
+                        detailDataAuctionObject.bidStart
+                          | date: "dd-LLLL-yyyy H:mm"
+                      }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Waktu Selesai Lelang:</strong>
+                      <span>{{
+                        detailDataAuctionObject.bidExpire
+                          | date: "dd-LLLL-yyyy H:mm"
+                      }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Penjual:</strong>
+                      <span>{{ detailDataAuctionObject.seller?.name }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Penyelenggara:</strong>
+                      <span>{{ detailDataAuctionObject.organizer?.name }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Lampiran:</strong>
+                      <span
+                        ><a
+                          href="{{ detailDataAuctionObject.attachment }}"
+                          target="_blank"
+                          ><i class="bi bi-file-earmark-pdf"></i> Klik disini
+                          untuk melihat lampiran</a
+                        ></span
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7 col-lg-7 section-md-t3 mt-6">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="title-box-d">
+                    <h3 class="title-d">Data Calon Peserta Lelang</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="summary-list">
+                <ul class="list">
+                  <li class="d-flex justify-content-between">
+                    <strong>Nama:</strong>
+                    <span>{{ dataKtp.namaLengkap }}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>NIK:</strong>
+                    <span>{{ dataKtp.ktpNo }}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Tempat & Tanggal Lahir:</strong>
+                    <span
+                      >{{ dataKtp.birthPlace }},
+                      {{ dataKtp.birthDate | date: "dd LLLL yyyy" }}</span
+                    >
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Alamat:</strong>
+                    <span>{{ dataKtp.address }}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>NPWP:</strong>
+                    <span>{{ dataNpwp.npwpNo }}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Nama Bank:</strong>
+                    <span>{{ dataRekening.bank }}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Nomor Rekening:</strong>
+                    <span>{{ dataRekening.accountNo }}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Atas Nama:</strong>
+                    <span>{{ dataRekening.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-3 text-center">
+      <div class="col-md-12 mt-3">
+        <mat-checkbox class="example-margin" [(ngModel)]="disabledButton">
+          Saya berkehendak untuk mengikuti lelang <br />
+          serta telah membaca dan menyetujui <br />
+          <a
+            routerLink="/syarat-dan-ketentuan"
+            target="_blank"
+            class="garis-bawah"
+            >Syarat dan Ketentuan</a
+          >
+          lelang ini
+        </mat-checkbox>
+        <br />
+        <button
+          class="btn btn-a"
+          (click)="createVirtualAccount()"
+          [disabled]="!disabledButton"
+        >
+          Ikut Lelang
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <section class="section-services section-t8">
+    <h1>Detail Status Lelang & Pembayaran</h1>
+    <mat-card>
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-striped">
+            <tbody>
+              <!-- <tr>
+                <th scope="row">Detail Status Lelang</th>
+              </tr> -->
+              <tr>
+                <th scope="row">Status Lelang</th>
+                <td>{{ dataVA.auctionobjectId?.status }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Waktu Mulai Lelang</th>
+                <td>
+                  {{
+                    dataVA.auctionobjectId?.bidStart | date: "dd-LLLL-yyyy H:mm"
+                  }}
+                </td>
+              </tr>
+              <!-- JIKA SESI BIDDING SEDANG BERLANGSUNG -->
+              <tr
+                *ngIf="dataVA.auctionobjectId?.status == 'SEDANG BERLANGSUNG'"
+              >
+                <th scope="row">Tindakan</th>
+                <td>
+                  <button
+                    class="btn btn-info"
+                    routerLink="/lot-lelang/bidding/{{
+                      dataVA.auctionobjectId?.id
+                    }}"
+                  >
+                    Mulai Bidding
+                  </button>
+                </td>
+              </tr>
+              <!-- EOF SESI BIDDING SEDANG BERLANGSUNG -->
+
+              <!-- SESI BIDDING SUDAH SELESAI -->
+              <tr *ngIf="dataVA.auctionobjectId?.status == 'SUDAH SELESAI'">
+                <th scope="row">Tindakan</th>
+                <td>
+                  <button
+                    class="btn btn-info"
+                    routerLink="/lot-lelang/pengumuman-bidding/{{
+                      dataVA.auctionobjectId?.id
+                    }}"
+                  >
+                    Lihat hasil
+                  </button>
+                </td>
+              </tr>
+              <!--EOF SESI BIDDING SUDAH SELESAI  -->
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <table class="table table-striped">
+            <tbody>
+              <!-- <tr>
+                <th scope="row">Pembayaran</th>
+              </tr> -->
+              <tr>
+                <th scope="row">Nominam Uang Jaminan</th>
+                <td>Rp{{ dataVA.value | number: "1.2-2" }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Virtual Account</th>
+                <td>{{ dataVA.noVa }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Nama Bank</th>
+                <td>BCA</td>
+              </tr>
+              <tr>
+                <th scope="row">Status Pembayaran</th>
+                <td *ngIf="dataVA.status == 'PAID'">
+                  <span class="badge bg-gradient-success">{{
+                    dataVA.status
+                  }}</span>
+                </td>
+                <td *ngIf="dataVA.status == 'PENDING'">
+                  <span class="badge bg-gradient-warning">{{
+                    dataVA.status
+                  }}</span>
+                </td>
+              </tr>
+              <tr *ngIf="dataVA.status == 'PENDING'">
+                <th scope="row"></th>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="payVA()"
+                  >
+                    Saya sudah membayar jaminan
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </mat-card>
+  </section>
+</div>
+<app-footer></app-footer>

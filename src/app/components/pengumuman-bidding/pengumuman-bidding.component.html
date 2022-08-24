@@ -1,0 +1,126 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <section class="section-services section-t8">
+    <!-- IF WIN -->
+    <div *ngIf="biddingDataWinner?.userId == userData?.id">
+      <div class="alert alert-info text-white" role="alert">
+        <h1 class="text-center text-white under font-weight-bold">
+          <u>SELAMAT ANDA MEMENANGKAN LELANG</u>
+        </h1>
+        <hr />
+        <p class="mb-0">
+          Anda harus membayar pelunasan biaya objek lelang setelah dikurangi
+          biaya jaminan yang telah anda bayarkan, berikut metode pembayaran yang
+          tersedia :
+        </p>
+      </div>
+
+      <div class="text-center">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-expansion-panel
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> Virtual Account BCA </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>
+                <a (click)="createVirtualAccount()">
+                  <strong>Klik disini</strong> jika anda ingin memilih metode
+                  pembayaran Virtual Account
+                </a>
+              </p>
+            </mat-expansion-panel>
+          </div>
+          <div class="col-md-6">
+            <mat-expansion-panel
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+              *ngIf="risiko == 'LOW'"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> KPR Rumah Second </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>
+                <a routerLink="/form-kpr/tambah">
+                  <strong>Klik disini</strong>
+                  jika anda ingin memilih metode pembayaran KPR Rumah Second</a
+                >
+              </p>
+            </mat-expansion-panel>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse text-center mt-2" id="collapseExample">
+        <div class="card card-body shadow-lg">
+          <p>
+            <a (click)="createVirtualAccount()" class="text-bolder"
+              >Klik disini
+            </a>
+            jika anda ingin memilih metode pembayaran Virtual Account
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse text-center mt-2" id="collapseExample2">
+        <div class="card card-body shadow-lg">
+          <a routerLink="/form-kpr/tambah"
+            >Klik disini jika anda ingin memilih metode pembayaran KPR Rumah
+            Second</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- EOF IF WIN -->
+
+    <!-- IF LOSE -->
+    <div
+      class="alert alert-danger text-white"
+      role="alert"
+      *ngIf="biddingDataWinner?.userId !== userData?.id"
+    >
+      <h1 class="text-center text-white under font-weight-bold">
+        <u>MAAF ANDA GAGAL MENDAPATKAN OBJEK LELANG INI</u>
+      </h1>
+      <hr />
+      <p class="text-center">
+        <a routerLink="lot-lelang">Klik disini</a>
+        untuk mengikuti lelang lainnya
+      </p>
+    </div>
+    <!-- EOF LOSE -->
+    <hr />
+    <h2>Data Riwayat Penawaran</h2>
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Kode Penawaran</th>
+            <th scope="col">Tanggal</th>
+            <th scope="col">Nilai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bid of biddingData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ bid.biddingCode }}</td>
+            <td>{{ bid.dateCreated | date: "dd-LLLL-yyyy H:mm" }}</td>
+            <td>
+              Rp {{ bid.value | number: "1.2-2" }}
+              <span
+                class="badge bg-gradient-info"
+                *ngIf="bid?.userId == userData?.id"
+                >Anda</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

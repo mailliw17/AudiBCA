@@ -1,0 +1,31 @@
+<h1 class="mt-3">Riwayat Pengisian Form - KPR Rumah Second</h1>
+<mat-card *ngIf="kprData == 0">
+  <div class="alert alert-warning text-white" role="alert">
+    Anda belum pernah mengisi form KPR Rumah Second
+  </div>
+</mat-card>
+
+<table datatable class="row-border hover">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Nama</th>
+      <th scope="col">Harga Properti</th>
+      <th scope="col">Jumlah Pinjaman</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let kpr of kprData; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ kpr.debitur.name }}</td>
+      <td>Rp{{ kpr.pengajuan.hargaProp | number: "1.2-2" }}</td>
+      <td>Rp{{ kpr.pengajuan.jumPinjaman | number: "1.2-2" }}</td>
+      <td>
+        <span class="badge bg-gradient-warning">Pending</span>
+      </td>
+    </tr>
+
+    <tr></tr>
+  </tbody>
+</table>

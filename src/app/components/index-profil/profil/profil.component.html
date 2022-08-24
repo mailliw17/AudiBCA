@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<main id="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <app-sidebar-profil></app-sidebar-profil>
+      </div>
+      <div class="col-md-8">
+        <section class="section-services section-t8">
+          <div *ngIf="this.router.url == '/status-lelang'">
+            <app-main-profil-status-lelang></app-main-profil-status-lelang>
+          </div>
+
+          <div *ngIf="this.router.url == '/pelunasan-lelang'">
+            <app-main-profil-pelunasan-lelang></app-main-profil-pelunasan-lelang>
+          </div>
+
+          <div *ngIf="this.router.url == '/profil/ktp'">
+            <app-main-profil-ktp></app-main-profil-ktp>
+          </div>
+
+          <div *ngIf="this.router.url == '/profil/rekening-bank'">
+            <app-main-profil-rekening-bank> </app-main-profil-rekening-bank>
+          </div>
+
+          <div *ngIf="this.router.url == '/profil/npwp'">
+            <app-main-profil-npwp> </app-main-profil-npwp>
+          </div>
+
+          <div *ngIf="this.router.url == '/profil/ganti-password'">
+            <app-main-profil-ganti-password> </app-main-profil-ganti-password>
+          </div>
+
+          <div *ngIf="this.router.url == '/profil/ganti-nama'">
+            <app-main-profil-ganti-nama> </app-main-profil-ganti-nama>
+          </div>
+
+          <div *ngIf="this.router.url == '/profil/ganti-nomor-hp'">
+            <app-main-profil-ganti-nomor-hp> </app-main-profil-ganti-nomor-hp>
+          </div>
+          <div *ngIf="this.router.url == '/profil/riwayat-kpr'">
+            <app-main-profil-riwayat-kpr> </app-main-profil-riwayat-kpr>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

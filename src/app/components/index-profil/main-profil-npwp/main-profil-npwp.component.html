@@ -1,0 +1,181 @@
+<mat-card *ngIf="!isExist">
+  <mat-card-title>Nomor Pokok Wajib Pajak (NPWP)</mat-card-title>
+  <div class="alert alert-danger" role="alert">
+    <div style="color: white">
+      Anda belum memiliki data NPWP. Daftarkan NPWP Anda dengan klik tombol Tambah
+      NPWP di bawah.
+    </div>
+  </div>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#modal-form">
+      <mat-icon>upload</mat-icon> Tambah NPWP
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="isExist">
+  <mat-card-title>Nomor Pokok Wajib Pajak (NPWP)</mat-card-title>
+  <br>
+  <div class="row" *ngIf="npwpData.path == null">
+    <div class="alert alert-danger" role="alert">
+      <div style="color: white;">
+        Anda diwajibkan mengunggah file scan/foto NPWP dengan klik tombol
+        <strong>Upload File NPWP</strong> di bawah.
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="npwpData.notes != null">
+    <div class="alert alert-danger" role="alert">
+      <div style="color: white;">
+        {{npwpData.notes}}
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row-mt-4 d-flex align-items-center justify-content-center">
+    <div *ngIf="npwpData.path == null">
+      <img src="https://alfatihmakassar.sch.id/wp-content/uploads/2020/01/placeholder-1.png" alt="" class="img-npwp" style="max-width: 300px; max-height: 200px"/>
+      <div class="d-flex align-items-center justify-content-center mt-4">
+        <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#file-form">
+          <mat-icon>add</mat-icon> Upload File NPWP
+        </button>
+      </div>
+    </div>
+    <div *ngIf="npwpData.path != null">
+      <img src="{{ npwpData.path }}" alt="" class="img-npwp" style="max-width: 300px; max-height: 200px"/>
+      <div class="d-flex align-items-center justify-content-center mt-4">
+        <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#file-form">
+          <mat-icon>add</mat-icon> Update File NPWP
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="table-responsive">
+      <table class="table align-items-center mb-0">
+        <tbody>
+          <tr>
+            <th scope="row">Nomor NPWP</th>
+            <td>{{ npwpData.npwpNo }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Nama</th>
+            <td>{{ npwpData.name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Alamat</th>
+            <td>{{ npwpData.npwpAddress }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Tanggal Disimpan</th>
+            <td>{{ npwpData.dateUpdated | date: "medium" }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Status Verifikasi</th>
+            <td>
+              <span class="badge bg-gradient-warning" *ngIf="!npwpData.isApproved && npwpData.notes == null">Pending</span>
+              <span class="badge bg-gradient-danger" *ngIf="!npwpData.isApproved && npwpData.notes != null">Rejected</span>
+              <span class="badge bg-gradient-success" *ngIf="npwpData.isApproved">Approved</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="warn" (click)="deleteNpwp()">
+      <mat-icon>delete</mat-icon> Hapus
+    </button>
+
+    <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#modal-form" *ngIf="npwpData.id!=null" (click)="openEditModal()">
+      <mat-icon>upload</mat-icon> Edit Data NPWP
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<div class="col-md-4">
+  <div class="modal fade" id="file-form" tabindex="-1" role="dialog" aria-labelledby="file-form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <p class="mb-0">Tambah Nomor Pokok Wajib Pajak (NPWP)</p>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="fileNpwpForm" (ngSubmit)="updateNpwpImage()">
+                <label>File NPWP</label>
+                <div class="input-group mb-3">
+                  <input type="file" class="form-control" name="npwpImage" id="npwpImage" (change)="onFileChange($event)">
+                </div>
+                <div class="row-mt-4 d-flex align-items-center justify-content-center mb-4" >
+                  <img [src]="imageSrc" *ngIf="imageSrc" style="max-width: 300px; max-height: 200px" />
+                </div>
+                <div class="text-center">
+                  <button mat-raised-button color="primary" class="mb-3">
+                    <mat-icon>save</mat-icon> Simpan
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Add Modal-->
+
+<div class="col-md-4">
+  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <p class="mb-0" *ngIf="!isExist">Tambah Nomor Pokok Wajib Pajak (NPWP)</p>
+              <p class="mb-0" *ngIf="isExist">Edit Nomor Pokok Wajib Pajak (NPWP)</p>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="npwpForm" (ngSubmit)="!isExist ? addNpwp() : updateNpwp()">
+                <label>Nomor NPWP</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Nomor NPWP" name="npwpNo"
+                  formControlName="npwpNo">
+                </div>
+
+                <label>Nama</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Nama Lengkap Sesuai NPWP" name="name"
+                  formControlName="name">
+                </div>
+
+                <label>Alamat</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Alamat tempat tinggal sesuai NPWP" name="npwpAddress" formControlName="npwpAddress">
+                </div>
+
+                <label>File NPWP</label>
+                <div class="input-group mb-3">
+                  <input type="file" class="form-control" name="npwpImage" id="npwpImage" (change)="onFileChange($event)">
+                </div>
+                <div class="row-mt-4 d-flex align-items-center justify-content-center mb-4" >
+                  <img [src]="imageSrc" *ngIf="imageSrc" style="max-width: 300px; max-height: 200px" />
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn bg-gradient-primary" value="Submit">Simpan</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

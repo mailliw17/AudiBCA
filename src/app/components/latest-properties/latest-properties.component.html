@@ -1,0 +1,121 @@
+<main id="main">
+  <section class="section-services section-t8" *ngIf="isLoggedIn == true">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">Status Pendaftaranmu</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" style="margin-left: -70px">
+          <div class="card-box-c foo">
+            <div class="card-header-c d-flex">
+              <div class="card-status-box-ico">
+                <h2>KTP</h2>
+                <div *ngIf="isKtpExist">
+                  <span class="bi bi-check-circle" style="color: green" *ngIf="ktpData.isApproved"></span>
+                  <span class="bi bi-x-circle" style="color: red" *ngIf="!ktpData.isApproved"></span>
+                </div>
+                <div *ngIf="!isKtpExist">
+                  <span class="bi bi-x-circle" style="color: red"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card-box-c foo">
+            <div class="card-header-c d-flex">
+              <div class="card-status-box-ico">
+                <h2>NPWP</h2>
+                <div *ngIf="isNpwpExist">
+                  <span class="bi bi-check-circle" style="color: green" *ngIf="npwpData.isApproved"></span>
+                  <span class="bi bi-x-circle" style="color: red" *ngIf="!npwpData.isApproved"></span>
+                </div>
+                <div *ngIf="!isNpwpExist">
+                  <span class="bi bi-x-circle" style="color: red"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card-box-c foo">
+            <div class="card-header-c d-flex">
+              <div class="card-status-box-ico">
+                <h2>Rekening</h2>
+                <span class="bi bi-check-circle" style="color: green" *ngIf="isRekeningExist"></span>
+                <span class="bi bi-x-circle" style="color: red" *ngIf="!isRekeningExist"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card-box-c foo">
+            <div class="card-header-c d-flex">
+              <div class="card-status-box-ico">
+                <h2>Profil</h2>
+                <span class="bi bi-check-circle" style="color: green" *ngIf="isIncomeExist && isLoanExist"></span>
+                <span class="bi bi-x-circle" style="color: red" *ngIf="!isIncomeExist || !isLoanExist"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======= Agents Section ======= -->
+  <section class="section-agents section-t8" *ngIf="isRecommendationExist">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">Rekomendasi untukmu</h2>
+            </div>
+            <div class="title-link">
+              <a routerLink="/lot-lelang">All Properties
+                <span class="bi bi-chevron-right"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let dao of dataAuctionObject">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="{{ dao.imageURL1 }}" alt="" class="img-a img-fluid" style="height: 600px" />
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="#">{{ dao.name }}</a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a" style="font-size: 10pt">
+                      <i class="bi bi-geo-alt"></i>
+                      {{ dao.organizer.name.substr(6) }} | Rp
+                      {{ dao.initialPrice | number: "1.2-2" }}
+                    </span>
+                  </div>
+                  <a routerLink="/lot-lelang/detail/{{ dao.id }}" class="link-a">Detail
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Agents Section -->
+</main>

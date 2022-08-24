@@ -1,0 +1,26 @@
+<div class="pt-5">
+
+    <h1 mat-dialog-title>Tambah Nomor Pokok Wajib Pajak (NPWP)</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="standard" class="example-full-width">
+            <mat-label>Kantor Pemeriksa KTP</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let kpKtp of pilihanKantorPemeriksaKtp" [value]="kpKtp.value">
+                    {{kpKtp.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard" class="example-full-width">
+            <mat-label>Nomor NPWP</mat-label>
+            <input matInput type="number">
+            <mat-hint>Isi dengan nomor NPWP (angka saja)</mat-hint>
+        </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button (click)="onNoClick()" color="warn">Batal</button>
+        <button mat-raised-button color="primary">Simpan</button>
+    </div>
+</div>

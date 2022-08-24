@@ -1,0 +1,11 @@
+.penawaran-tertinggi {
+    height: 100px;
+    font-weight: bolder;
+    background-color: #0597F2;
+    vertical-align: middle;
+}
+
+.penawaran-tertinggi-bg {
+    background-color: #0597F2;
+    font-weight: bolder;
+}

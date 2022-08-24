@@ -1,0 +1,115 @@
+<app-navbar></app-navbar>
+<main class="">
+  <!-- ======= Intro Single ======= -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">{{ detailDataAuctionObject.lotCode }}</h1>
+            <span class="color-text-a">{{ detailDataAuctionObject.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- End Intro Single-->
+  <!-- End Intro Single-->
+
+  <!-- ======= Property Single ======= -->
+  <section class="property-single nav-arrow-b">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div id="property-single-carousel" class="swiper">
+            <app-carousel-detail></app-carousel-detail>
+          </div>
+          <div class="property-single-carousel-pagination carousel-pagination"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row justify-content-between">
+            <div class="col-md-5 col-lg-4">
+              <div class="property-summary">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="title-box-d section-t4">
+                      <h3 class="title-d">Quick Summary</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="summary-list">
+                  <ul class="list">
+                    <li class="d-flex justify-content-between">
+                      <strong>Lot Lelang:</strong>
+                      <span>{{detailDataAuctionObject.lotCode}}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Harga Awal:</strong>
+                      <span>Rp {{detailDataAuctionObject.initialPrice| number: "1.2-2"}}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Jaminan:</strong>
+                      <span>Rp {{detailDataAuctionObject.collateralQuantity| number: "1.2-2"}}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Batas Akhir Jaminan:</strong>
+                      <span>{{detailDataAuctionObject.collateralExpire| date: "dd LLLL yyyy"}}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Waktu Mulai Lelang:</strong>
+                      <span>{{detailDataAuctionObject.bidStart | date: "dd-LLLL-yyyy H:mm"}}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Waktu Selesai Lelang:</strong>
+                      <span>{{detailDataAuctionObject.bidExpire | date: "dd-LLLL-yyyy H:mm"}}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Penjual:</strong>
+                      <span>{{ detailDataAuctionObject.seller?.name }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Penyelenggara:</strong>
+                      <span>{{ detailDataAuctionObject.organizer?.name }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Lampiran:</strong>
+                      <span><a href="{{ detailDataAuctionObject.attachment }}" target="_blank"><i
+                            class="bi bi-file-earmark-pdf"></i> Klik
+                          disini untuk melihat lampiran</a></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7 col-lg-7 section-md-t3 mt-6">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="title-box-d">
+                    <h3 class="title-d">Property Description</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="property-description">
+                <p class="description color-text-a" style="white-space: pre-line">
+                  {{ detailDataAuctionObject.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-3 text-center">
+      <div class="col-md-12 mt-3">
+        <button type="submit" class="btn btn-a" routerLink="/lot-lelang/konfirmasi-ikut-lelang/{{
+              detailDataAuctionObject.id
+            }}">Ikut Lelang</button>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End Property Single-->
+<app-footer></app-footer>

@@ -1,0 +1,2340 @@
+<app-navbar></app-navbar>
+<main class="main-content">
+  <section class="section-services section-t8 mb-3">
+    <div class="container">
+      <!-- <h1 class="text-center mt-2">ISI FORM KPR</h1> -->
+      <!-- <button mat-raised-button (click)="isEditable = !isEditable">
+        {{ !isEditable ? "Enable edit mode" : "Disable edit mode" }}
+      </button> -->
+
+      <mat-stepper labelPosition="bottom" linear="" #stepper>
+        <mat-step [stepControl]="screeningDebitur">
+          <form [formGroup]="screeningDebitur">
+            <ng-template matStepLabel> Screening Debitur </ng-template>
+            <h2>Screening Debitur</h2>
+            <hr />
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nama Lengkap</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nama_lengkap"
+                required=""
+              />
+            </div>
+
+            <div
+              *ngIf="
+                screeningDebitur.controls['nama_lengkap'].invalid &&
+                screeningDebitur.controls['nama_lengkap'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                  screeningDebitur.controls['nama_lengkap'].errors?.['required']
+                "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <label for="exampleFormControlInput1">Status Pernikahan</label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="spernikahan"
+                formControlName="spernikahan"
+                value="menikah"
+              />
+              <label class="custom-control-label" for="customRadio1"
+                >Menikah</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="spernikahan"
+                formControlName="spernikahan"
+                value="lajang"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Lajang</label
+              >
+            </div>
+
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="spernikahan"
+                formControlName="spernikahan"
+                value="janda/cerai"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Janda / Cerai</label
+              >
+            </div>
+
+            <div
+              *ngIf="
+                screeningDebitur.controls['spernikahan'].invalid &&
+                screeningDebitur.controls['spernikahan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                  screeningDebitur.controls['spernikahan'].errors?.['required']
+                "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="example-date-input" class="form-control-label"
+                >Tanggal Lahir</label
+              >
+              <input
+                class="form-control"
+                type="date"
+                name="dob"
+                formControlName="dob"
+              />
+            </div>
+            <div
+              *ngIf="
+                screeningDebitur.controls['dob'].invalid &&
+                screeningDebitur.controls['dob'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                  screeningDebitur.controls['dob'].errors?.['required']
+                "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Jenis Pekerjaan</label>
+              <select class="form-control" formControlName="jpekerjaan">
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option value="karyawan">Karyawan</option>
+                <option value="wiraswasta">Wiraswasta</option>
+                <option value="profesional">Profesional</option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                screeningDebitur.controls['jpekerjaan'].invalid &&
+                screeningDebitur.controls['jpekerjaan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                screeningDebitur.controls['jpekerjaan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <label for="exampleFormControlInput1"
+              >Apakah Anda Nasabah BCA</label
+            >
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="isNasabah"
+                [(ngModel)]="isNasabah"
+                [value]="true"
+                formControlName="isNasabah"
+              />
+              <label class="custom-control-label" for="customRadio1">Ya</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="isNasabah"
+                [(ngModel)]="isNasabah"
+                [value]="false"
+                formControlName="isNasabah"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Tidak</label
+              >
+            </div>
+            <div
+              *ngIf="
+                screeningDebitur.controls['isNasabah'].invalid &&
+                screeningDebitur.controls['isNasabah'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                screeningDebitur.controls['isNasabah'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="isNasabah">
+              <label for="exampleFormControlInput1"
+                >Nomor Rekening Pemohon</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="accountNumber"
+                formControlName="accountNumber"
+              />
+            </div>
+
+            <div class="text-end">
+              <button
+                matStepperNext
+                class="btn btn-primary m-1"
+                (click)="markAllAsTouched(screeningDebitur)"
+              >
+                Lanjut
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPengajuan">
+          <form [formGroup]="dataPengajuan">
+            <ng-template matStepLabel> Data Pengajuan</ng-template>
+            <h2>Data Pengajuan Kredit</h2>
+            <h3>Fasilitas Pengajuan</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Tujuan Kredit</label>
+              <select class="form-control" formControlName="tkredit">
+                <option value="KPR Rumah Second">KPR Rumah Second</option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['tkredit'].invalid &&
+                dataPengajuan.controls['tkredit'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['tkredit'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Harga Properti</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="hargaProp"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['hargaProp'].invalid &&
+                dataPengajuan.controls['hargaProp'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['hargaProp'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Jumlah Pinjaman</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="jumPinjaman"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['jumPinjaman'].invalid &&
+                dataPengajuan.controls['jumPinjaman'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['jumPinjaman'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Suku Bunga</label>
+              <select class="form-control" formControlName="sukuBunga">
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option value="fix1thn">Fixed 1 Tahun</option>
+                <option value="fix2thn">Fixed 2 Tahun</option>
+                <option value="fixjenjang8thn">
+                  Fix Berjenjang Hingga 8 Tahun
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['sukuBunga'].invalid &&
+                dataPengajuan.controls['sukuBunga'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['sukuBunga'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Jangka Waktu Pinjaman (Bulan)</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                formControlName="jangkaWaktu"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['jangkaWaktu'].invalid &&
+                dataPengajuan.controls['jangkaWaktu'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['jangkaWaktu'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <hr />
+            <h3>Data Jaminan</h3>
+
+            <div
+              class="alert alert-warning text-center text-white"
+              role="alert"
+            >
+              Untuk tujuan kredit pembelian rumah second, anda wajib mengisi
+              data jaminan rumah lainnya, bukan rumah lelang
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Jenis Jaminan</label>
+              <select class="form-control" formControlName="jenisJaminan">
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option value="apartment">Apartemen</option>
+                <option value="rumah">Rumah Tinggal</option>
+                <option value="ruko">Ruko</option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['jenisJaminan'].invalid &&
+                dataPengajuan.controls['jenisJaminan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['jenisJaminan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Alamat Jaminan</label>
+              <textarea
+                class="form-control"
+                formControlName="alamatJaminan"
+                rows="3"
+              ></textarea>
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['alamatJaminan'].invalid &&
+                dataPengajuan.controls['alamatJaminan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['alamatJaminan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kode Pos</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="zipCode"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['zipCode'].invalid &&
+                dataPengajuan.controls['zipCode'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['zipCode'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <!-- START CASCADING 1-->
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Provinsi</label>
+              <select
+                class="form-control"
+                formControlName="province"
+                (change)="provinceChanged()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let province of provinceData"
+                  [value]="province.name"
+                >
+                  {{ province.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['province'].invalid &&
+                dataPengajuan.controls['province'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['province'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih Kota"
+                *ngIf="cityData.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="city"
+                *ngIf="cityData.length !== 0"
+                (change)="cityChanged()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option *ngFor="let city of cityData" [value]="city.name">
+                  {{ city.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['city'].invalid &&
+                dataPengajuan.controls['city'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['city'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kecamatan</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kecamatan"
+                *ngIf="kecamatanData.length === 0"
+                readonly
+              />
+
+              <select
+                class="form-control"
+                formControlName="kecamatan"
+                *ngIf="kecamatanData.length !== 0"
+                (change)="kecamatanChanged()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let kecamatan of kecamatanData"
+                  [value]="kecamatan.name"
+                >
+                  {{ kecamatan.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['kecamatan'].invalid &&
+                dataPengajuan.controls['kecamatan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['kecamatan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kelurahan</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kelurahan"
+                *ngIf="kelurahanData.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="kelurahan"
+                *ngIf="kelurahanData.length !== 0"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let kelurahan of kelurahanData"
+                  label="{{ kelurahan.name }}"
+                >
+                  {{ kelurahan.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPengajuan.controls['kelurahan'].invalid &&
+                dataPengajuan.controls['kelurahan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPengajuan.controls['kelurahan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+            <!-- EOF CASCADING 1-->
+
+            <label for="exampleFormControlInput1"
+              >Luas Tanah (m2) / Luas Bangunan (m2)</label
+            >
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="luasTanah"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    dataPengajuan.controls['luasTanah'].invalid &&
+                    dataPengajuan.controls['luasTanah'].touched
+                  "
+                  class="alert alert-danger text-white"
+                >
+                  <div
+                    *ngIf="
+                dataPengajuan.controls['luasTanah'].errors?.['required']
+              "
+                  >
+                    Silahkan isi bagian ini
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="luasBangunan"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    dataPengajuan.controls['luasBangunan'].invalid &&
+                    dataPengajuan.controls['luasBangunan'].touched
+                  "
+                  class="alert alert-danger text-white"
+                >
+                  <div
+                    *ngIf="
+                dataPengajuan.controls['luasBangunan'].errors?.['required']
+              "
+                  >
+                    Silahkan isi bagian ini
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button
+                matStepperNext
+                class="btn btn-primary m-1"
+                (click)="markAllAsTouched(dataPengajuan)"
+              >
+                Lanjut
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPemohon">
+          <form [formGroup]="dataPemohon">
+            <ng-template matStepLabel>Data Pemohon</ng-template>
+            <h2>Data Pemohon</h2>
+            <h3>Tentang Anda</h3>
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Nama Gadis Ibu Kandung</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="motherName"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['motherName'].invalid &&
+                dataPemohon.controls['motherName'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['motherName'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Jumlah Tanggungan</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="jumTanggunan"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['jumTanggunan'].invalid &&
+                dataPemohon.controls['jumTanggunan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['jumTanggunan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Pendidikan Terakhir</label>
+              <select class="form-control" formControlName="pendidikanTerakhir">
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option value="SD / SMP / SMA">SD / SMP / SMA</option>
+                <option value="Diploma">Diploma</option>
+                <option value="S1">S1</option>
+                <option value="S2 / S3">S2 / S3</option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['pendidikanTerakhir'].invalid &&
+                dataPemohon.controls['pendidikanTerakhir'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['pendidikanTerakhir'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nomor Telepon Rumah</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="nomorTeleponRumah"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['nomorTeleponRumah'].invalid &&
+                dataPemohon.controls['nomorTeleponRumah'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['nomorTeleponRumah'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nomor Ponsel</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="phoneNumber"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['phoneNumber'].invalid &&
+                dataPemohon.controls['phoneNumber'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['phoneNumber'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Alamat Email</label>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['email'].invalid &&
+                dataPemohon.controls['email'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['email'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <hr />
+
+            <h3>Tempat tinggal Anda saat ini</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1"
+                >Alamat (Tempat Tinggal)</label
+              >
+              <textarea
+                class="form-control"
+                rows="3"
+                formControlName="alamat"
+              ></textarea>
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['alamat'].invalid &&
+                dataPemohon.controls['alamat'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['alamat'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kode Pos</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="zipCode"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['zipCode'].invalid &&
+                dataPemohon.controls['zipCode'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['zipCode'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <!-- START CASCADING 2-->
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Provinsi</label>
+              <select
+                class="form-control"
+                formControlName="province"
+                (change)="provinceChanged2()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let province of provinceData2"
+                  [value]="province.name"
+                >
+                  {{ province.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['province'].invalid &&
+                dataPemohon.controls['province'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['province'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih Kota"
+                *ngIf="cityData2.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="city"
+                *ngIf="cityData2.length !== 0"
+                (change)="cityChanged2()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option *ngFor="let city of cityData2" [value]="city.name">
+                  {{ city.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['city'].invalid &&
+                dataPemohon.controls['city'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['city'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kecamatan</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kecamatan"
+                *ngIf="kecamatanData2.length === 0"
+                readonly
+              />
+
+              <select
+                class="form-control"
+                formControlName="kecamatan"
+                *ngIf="kecamatanData2.length !== 0"
+                (change)="kecamatanChanged2()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let kecamatan of kecamatanData2"
+                  [value]="kecamatan.name"
+                >
+                  {{ kecamatan.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['kecamatan'].invalid &&
+                dataPemohon.controls['kecamatan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['kecamatan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kelurahan</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kelurahan"
+                *ngIf="kelurahanData2.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="kelurahan"
+                *ngIf="kelurahanData2.length !== 0"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let kelurahan of kelurahanData2"
+                  label="{{ kelurahan.name }}"
+                >
+                  {{ kelurahan.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['kelurahan'].invalid &&
+                dataPemohon.controls['kelurahan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['kelurahan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+            <!-- EOF CASCADING 2 -->
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Status Rumah</label>
+              <select class="form-control" formControlName="statsRumah">
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option value="Milik Sendiri">Milik Sendiri</option>
+                <option value="Keluarga">Keluarga</option>
+                <option value="Kontrak">Kontrak</option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPemohon.controls['statsRumah'].invalid &&
+                dataPemohon.controls['statsRumah'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPemohon.controls['statsRumah'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button
+                matStepperNext
+                class="btn btn-primary m-1"
+                (click)="markAllAsTouched(dataPemohon)"
+              >
+                Lanjut
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPenghasilan">
+          <form [formGroup]="dataPenghasilan">
+            <ng-template matStepLabel>Data Penghasilan</ng-template>
+            <h2>Data Penghasilan</h2>
+            <p>
+              Kami perlu mempelajari lebih jauh mengenai pekerjaan dan arus
+              keuangan Anda sehingga kami dapat mengevaluasi jumlah pinjaman
+              Anda.
+            </p>
+            <hr />
+            <h3>Pekerjaan Pemohon</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nama Perusahaan</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="officeName"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['officeName'].invalid &&
+                dataPenghasilan.controls['officeName'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['officeName'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Jenis Usaha</label>
+              <select class="form-control" formControlName="jenisUsaha">
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option value="Perkebunan">Perkebunan dan Pertanian</option>
+                <option value="Perbankan">Perbankan</option>
+                <option value="Teknologi">Teknologi</option>
+              </select>
+            </div>
+
+            <div
+              *ngIf="
+                dataPenghasilan.controls['jenisUsaha'].invalid &&
+                dataPenghasilan.controls['jenisUsaha'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['jenisUsaha'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Unit Kerja</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="unitKerja"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['unitKerja'].invalid &&
+                dataPenghasilan.controls['unitKerja'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['unitKerja'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Jabatan</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="jabatan"
+              />
+            </div>
+
+            <div
+              *ngIf="
+                dataPenghasilan.controls['jabatan'].invalid &&
+                dataPenghasilan.controls['jabatan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['jabatan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1"
+                >Alamat Tempat Kerja</label
+              >
+              <textarea
+                class="form-control"
+                rows="3"
+                formControlName="officeAddress"
+              ></textarea>
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['officeAddress'].invalid &&
+                dataPenghasilan.controls['officeAddress'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['officeAddress'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kode Pos</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="zipCode"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['zipCode'].invalid &&
+                dataPenghasilan.controls['zipCode'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['zipCode'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <!-- START CASCADING 3-->
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Provinsi</label>
+              <select
+                class="form-control"
+                formControlName="province"
+                (change)="provinceChanged3()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let province of provinceData3"
+                  [value]="province.name"
+                >
+                  {{ province.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['province'].invalid &&
+                dataPenghasilan.controls['province'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['province'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih Kota"
+                *ngIf="cityData3.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="city"
+                *ngIf="cityData3.length !== 0"
+                (change)="cityChanged3()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option *ngFor="let city of cityData3" [value]="city.name">
+                  {{ city.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['city'].invalid &&
+                dataPenghasilan.controls['city'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['city'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kecamatan</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kecamatan"
+                *ngIf="kecamatanData3.length === 0"
+                readonly
+              />
+
+              <select
+                class="form-control"
+                formControlName="kecamatan"
+                *ngIf="kecamatanData3.length !== 0"
+                (change)="kecamatanChanged3()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let kecamatan of kecamatanData3"
+                  [value]="kecamatan.name"
+                >
+                  {{ kecamatan.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['kecamatan'].invalid &&
+                dataPenghasilan.controls['kecamatan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['kecamatan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kelurahan</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kelurahan"
+                *ngIf="kelurahanData3.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="kelurahan"
+                *ngIf="kelurahanData3.length !== 0"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let kelurahan of kelurahanData3"
+                  label="{{ kelurahan.name }}"
+                >
+                  {{ kelurahan.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['kelurahan'].invalid &&
+                dataPenghasilan.controls['kelurahan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['kelurahan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+            <!-- EOF CASCADING 3 -->
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">No Telepon (Hunting)</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="phoneNumberHunting"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['phoneNumberHunting'].invalid &&
+                dataPenghasilan.controls['phoneNumberHunting'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['phoneNumberHunting'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">No Telepon (Direct)</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="phoneNumberDirect"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['phoneNumberDirect'].invalid &&
+                dataPenghasilan.controls['phoneNumberDirect'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataPenghasilan.controls['phoneNumberDirect'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <label for="exampleFormControlSelect1">Bekerja Sejak</label>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Bulan</label>
+                  <select class="form-control" formControlName="monthFirstWork">
+                    <option
+                      disabled
+                      selected
+                      label="--SILAHKAN PILIH--"
+                    ></option>
+                    <option value="01">Januari</option>
+                    <option value="02">Februari</option>
+                    <option value="03">Maret</option>
+                    <option value="04">April</option>
+                    <option value="05">Mei</option>
+                    <option value="06">Juni</option>
+                    <option value="07">Juli</option>
+                    <option value="08">Agustus</option>
+                    <option value="09">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                  </select>
+                </div>
+                <div
+                  *ngIf="
+                    dataPenghasilan.controls['monthFirstWork'].invalid &&
+                    dataPenghasilan.controls['monthFirstWork'].touched
+                  "
+                  class="alert alert-danger text-white"
+                >
+                  <div
+                    *ngIf="
+                dataPenghasilan.controls['monthFirstWork'].errors?.['required']
+              "
+                  >
+                    Silahkan isi bagian ini
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Tahun</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="yearFirstWork"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    dataPenghasilan.controls['yearFirstWork'].invalid &&
+                    dataPenghasilan.controls['yearFirstWork'].touched
+                  "
+                  class="alert alert-danger text-white"
+                >
+                  <div
+                    *ngIf="
+              dataPenghasilan.controls['yearFirstWork'].errors?.['required']
+            "
+                  >
+                    Silahkan isi bagian ini
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <h3>Data Keuangan</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Penghasilan Pemohon</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="penghasilan"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['penghasilan'].invalid &&
+                dataPenghasilan.controls['penghasilan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+          dataPenghasilan.controls['penghasilan'].errors?.['required']
+        "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Penghasilan Tambahan</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="penghasilanTamb"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['penghasilanTamb'].invalid &&
+                dataPenghasilan.controls['penghasilanTamb'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+          dataPenghasilan.controls['penghasilanTamb'].errors?.['required']
+        "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Biaya Rumah Tangga</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="biayaRmhtg"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['biayaRmhtg'].invalid &&
+                dataPenghasilan.controls['biayaRmhtg'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+          dataPenghasilan.controls['biayaRmhtg'].errors?.['required']
+        "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Angsuran Lainnya</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="angsuranLain"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataPenghasilan.controls['angsuranLain'].invalid &&
+                dataPenghasilan.controls['angsuranLain'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+          dataPenghasilan.controls['angsuranLain'].errors?.['required']
+        "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button
+                matStepperNext
+                class="btn btn-primary m-1"
+                (click)="markAllAsTouched(dataPenghasilan)"
+              >
+                Lanjut
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataKeluargaTerdekat">
+          <form [formGroup]="dataKeluargaTerdekat">
+            <ng-template matStepLabel>Data Keluarga Terdekat</ng-template>
+            <h2>Data Keluarga Terdekat (Tidak Tinggal Serumah)</h2>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nama</label>
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['name'].invalid &&
+                dataKeluargaTerdekat.controls['name'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+          dataKeluargaTerdekat.controls['name'].errors?.['required']
+        "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nomor Telepon Rumah</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="nomorTeleponRumah"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['nomorTeleponRumah'].invalid &&
+                dataKeluargaTerdekat.controls['nomorTeleponRumah'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataKeluargaTerdekat.controls['nomorTeleponRumah'].errors?.['required']
+      "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nomor Ponsel</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="phoneNumber"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['phoneNumber'].invalid &&
+                dataKeluargaTerdekat.controls['phoneNumber'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataKeluargaTerdekat.controls['phoneNumber'].errors?.['required']
+      "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1"
+                >Hubungan Dengan Debitur</label
+              >
+              <select class="form-control" formControlName="hubungan">
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option value="orangtua">Orang Tua</option>
+                <option value="saudara_lakilaki">Saudara Laki-laki</option>
+                <option value="saudara_perempuan">Saudara Perempuan</option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['hubungan'].invalid &&
+                dataKeluargaTerdekat.controls['hubungan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataKeluargaTerdekat.controls['hubungan'].errors?.['required']
+      "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1"
+                >Alamat Tempat Tinggal</label
+              >
+              <textarea
+                class="form-control"
+                formControlName="alamatKeluarga"
+                rows="3"
+              ></textarea>
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['alamatKeluarga'].invalid &&
+                dataKeluargaTerdekat.controls['alamatKeluarga'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataKeluargaTerdekat.controls['alamatKeluarga'].errors?.['required']
+      "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kode Pos</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="zipCode"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['zipCode'].invalid &&
+                dataKeluargaTerdekat.controls['zipCode'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataKeluargaTerdekat.controls['zipCode'].errors?.['required']
+      "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <!-- START CASCADING 4-->
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Provinsi</label>
+              <select
+                class="form-control"
+                formControlName="province"
+                (change)="provinceChanged4()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let province of provinceData4"
+                  [value]="province.name"
+                >
+                  {{ province.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['province'].invalid &&
+                dataKeluargaTerdekat.controls['province'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataKeluargaTerdekat.controls['province'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih Kota"
+                *ngIf="cityData4.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="city"
+                *ngIf="cityData4.length !== 0"
+                (change)="cityChanged4()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option *ngFor="let city of cityData4" [value]="city.name">
+                  {{ city.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['city'].invalid &&
+                dataKeluargaTerdekat.controls['city'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataKeluargaTerdekat.controls['city'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kecamatan</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kecamatan"
+                *ngIf="kecamatanData4.length === 0"
+                readonly
+              />
+
+              <select
+                class="form-control"
+                formControlName="kecamatan"
+                *ngIf="kecamatanData4.length !== 0"
+                (change)="kecamatanChanged4()"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let kecamatan of kecamatanData4"
+                  [value]="kecamatan.name"
+                >
+                  {{ kecamatan.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['kecamatan'].invalid &&
+                dataKeluargaTerdekat.controls['kecamatan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataKeluargaTerdekat.controls['kecamatan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kelurahan</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kelurahan"
+                *ngIf="kelurahanData4.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="kelurahan"
+                *ngIf="kelurahanData4.length !== 0"
+              >
+                <option disabled selected label="--SILAHKAN PILIH--"></option>
+                <option
+                  *ngFor="let kelurahan of kelurahanData4"
+                  label="{{ kelurahan.name }}"
+                >
+                  {{ kelurahan.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                dataKeluargaTerdekat.controls['kelurahan'].invalid &&
+                dataKeluargaTerdekat.controls['kelurahan'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+                dataKeluargaTerdekat.controls['kelurahan'].errors?.['required']
+              "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+            <!-- EOF CASCADING 4 -->
+
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button
+                matStepperNext
+                class="btn btn-primary m-1"
+                (click)="markAllAsTouched(dataKeluargaTerdekat)"
+              >
+                Lanjut
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataUploadDokumen">
+          <form [formGroup]="dataUploadDokumen">
+            <ng-template matStepLabel>Upload Dokument</ng-template>
+            <h2>Upload Dokumen Pendukung</h2>
+            <p>
+              Kami memerlukan seluruh dokumen pada tabel berikut sebagai
+              pemenuhan syarat pengajuan fasilitas Anda.
+            </p>
+            <p>
+              Mohon unggah / upload seluruh dokumen berikut sebagai dukungan
+              pengajuan kredit kepemilikan properti Anda, dengan ketentuan
+              sebagai berikut :
+            </p>
+            <ol>
+              <li>
+                Format file yang dapat di unggah adalah pdf, jpg, jpeg, png
+              </li>
+              <li>
+                Pastikan file yang Anda upload dapat terbaca oleh Kami untuk
+                dianalisa.
+              </li>
+              <li>Maksimal size setiap file : 5 MB</li>
+            </ol>
+
+            <hr />
+
+            <h3>Dokumen Umum</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">KTP Pemohon</label>
+              <input
+                type="file"
+                class="form-control"
+                name="ktp"
+                id="ktp"
+                formControlName="ktp"
+                (change)="onKTPChange($event)"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataUploadDokumen.controls['ktp'].invalid &&
+                dataUploadDokumen.controls['ktp'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataUploadDokumen.controls['ktp'].errors?.['required']
+      "
+              >
+                Silahkan unggah file bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kartu Keluarga</label>
+              <input
+                type="file"
+                class="form-control"
+                formControlName="kk"
+                (change)="onKKChange($event)"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataUploadDokumen.controls['kk'].invalid &&
+                dataUploadDokumen.controls['kk'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataUploadDokumen.controls['kk'].errors?.['required']
+      "
+              >
+                Silahkan unggah file bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">NPWP</label>
+              <input
+                type="file"
+                class="form-control"
+                formControlName="npwp"
+                (change)="onNPWPChange($event)"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataUploadDokumen.controls['npwp'].invalid &&
+                dataUploadDokumen.controls['npwp'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataUploadDokumen.controls['npwp'].errors?.['required']
+      "
+              >
+                Silahkan unggah file bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Mutasi Tabungan (3 bulan terakhir)</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                formControlName="mutasi"
+                (change)="onMutasiChange($event)"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataUploadDokumen.controls['mutasi'].invalid &&
+                dataUploadDokumen.controls['mutasi'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataUploadDokumen.controls['mutasi'].errors?.['required']
+      "
+              >
+                Silahkan unggah file bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Surat Keterangan Perusahaan</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                formControlName="ketper"
+                (change)="onKeteranganPerusahaanChange($event)"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataUploadDokumen.controls['ketper'].invalid &&
+                dataUploadDokumen.controls['ketper'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataUploadDokumen.controls['ketper'].errors?.['required']
+      "
+              >
+                Silahkan unggah file bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Slip Gaji Terakhir</label>
+              <input
+                type="file"
+                class="form-control"
+                formControlName="slipgaji"
+                (change)="onSlipGajiChange($event)"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataUploadDokumen.controls['slipgaji'].invalid &&
+                dataUploadDokumen.controls['slipgaji'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataUploadDokumen.controls['slipgaji'].errors?.['required']
+      "
+              >
+                Silahkan unggah file bagian ini
+              </div>
+            </div>
+
+            <hr />
+            <h3>Dokumen Jaminan</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Sertifikat HM/HGB/Strate Title</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                formControlName="hm"
+                (change)="onHMChange($event)"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataUploadDokumen.controls['hm'].invalid &&
+                dataUploadDokumen.controls['hm'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataUploadDokumen.controls['hm'].errors?.['required']
+      "
+              >
+                Silahkan unggah file bagian ini
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Sertifikat IMB</label>
+              <input
+                type="file"
+                class="form-control"
+                formControlName="imb"
+                (change)="onIMBChange($event)"
+              />
+            </div>
+            <div
+              *ngIf="
+                dataUploadDokumen.controls['imb'].invalid &&
+                dataUploadDokumen.controls['imb'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataUploadDokumen.controls['imb'].errors?.['required']
+      "
+              >
+                Silahkan unggah file bagian ini
+              </div>
+            </div>
+
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button
+                matStepperNext
+                class="btn btn-primary m-1"
+                (click)="markAllAsTouched(dataUploadDokumen)"
+              >
+                Lanjut
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPernyataanFinasial">
+          <form [formGroup]="dataPernyataanFinasial">
+            <ng-template matStepLabel>Pernyataan Finansial</ng-template>
+            <h3>Pernyataan Finansial</h3>
+            <p>
+              Pernyataan finansial merupakan data tentang kepemilikan kredit
+              yang telah anda ajukan atau anda telah terima, sebagai
+              pertimbangan kita dalam menerima kredit anda berikutnya.
+            </p>
+            <hr />
+
+            <p class="text-bold">
+              Apakah anda sudah/telah menerima fasilitas pembiayaan properti?
+            </p>
+
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="1"
+                name="pernyataan_finansial"
+                formControlName="pernyataan_finansial"
+              />
+              <label class="custom-control-label" for="customRadio1"
+                >Saya dan/ atau suami/ istri BELUM PERNAH MENERIMA fasilitas
+                pembiayaan Properti dari Bank manapun DAN belum pernah
+                MENGAJUKAN proses permohonan di bank manapun</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="2"
+                name="pernyataan_finansial"
+                formControlName="pernyataan_finansial"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Saya dan/ atau suami/ istri TELAH MENERIMA fasilitas pembiayaan
+                Properti baik di BCA maupun di bank selain BCA
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="3"
+                name="pernyataan_finansial"
+                formControlName="pernyataan_finansial"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Saya dan/ atau suami/ istri DALAM PROSES PENGAJUAN fasilitas
+                pembiayaan Properti baik di BCA maupun di bank selain BCA
+              </label>
+            </div>
+            <div
+              *ngIf="
+                dataPernyataanFinasial.controls['pernyataan_finansial']
+                  .invalid &&
+                dataPernyataanFinasial.controls['pernyataan_finansial'].touched
+              "
+              class="alert alert-danger text-white"
+            >
+              <div
+                *ngIf="
+        dataPernyataanFinasial.controls['pernyataan_finansial'].errors?.['required']
+      "
+              >
+                Silahkan isi bagian ini
+              </div>
+            </div>
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button
+                matStepperNext
+                class="btn btn-primary m-1"
+                (click)="markAllAsTouched(dataPernyataanFinasial)"
+              >
+                Lanjut
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataSuratPernyataan">
+          <form [formGroup]="dataSuratPernyataan">
+            <ng-template matStepLabel>Surat Pernyataan </ng-template>
+            <h2>Ringkasan Pengajuan</h2>
+            <p>
+              Mohon lakukan pengecekan kembali sebelum menekan tombol “Ajukan
+              KPR” untuk pengajuan kredit kepemilikan properti Anda secara
+              seksama, informasi yang telah Anda isi akan kami gunakan untuk
+              menindak lanjuti pengajuan Anda
+            </p>
+            <hr />
+            <p>PERNYATAAN</p>
+            <p>
+              Sehubungan dengan data/informasi serta dokumen yang saya berikan
+              tersebut diatas dengan ini saya selaku pemohon kredit menyatakan
+              sebagai berikut:
+            </p>
+            <ol>
+              <li>
+                Bahwa pada tanggal diajukannya formulir ini saya menyatakan
+                bahwa: Saya dan/atau suami/istri BELUM pernah MENERIMA DAN BELUM
+                pernah MENGAJUKAN fasilitas pembiayaan properti baik di BCA
+                maupun bank selain BCA.
+              </li>
+              <li>
+                Dalam hal saya menyampaikan pernyataan yang tidak benar maka
+                sehubungan dengan permohonan ini saya bersedia melaksanakan
+                langkah-langkah yang ditetapkan oleh BCA dalam rangka pemenuhan
+                ketentuan Bank Indonesia mengenai Loan to Value atau Financing
+                to Value.
+              </li>
+              <li>
+                Semua informasi dan dokumen yang saya lampirkan dalam permohonan
+                ini adalah benar dan apabila terdapat perubahan data dalam
+                aplikasi, saya wajib segera memberikan informasi terbaru kepada
+                BCA (Hub: HaloBCA 1500888).
+              </li>
+              <li>
+                Dengan ini saya memberikan kuasa kepada BCA untuk melakukan
+                pemeriksaan terhadap kebenaran data/ informasi serta dokumen
+                yang saya serahkan dari sumber manapun dan dengancara yang
+                dianggap baik dan perlu oleh BCA, termasuk pengecekan terhadap
+                kebenaran rekening ke bank terkait dan membebaskan BCA dari
+                segala tuntutan dari pihak manapun sehubungan pemeriksaan
+                tersebut.
+              </li>
+              <li>
+                Dalam hal permohonan saya disetujui, pinjaman yang akan
+                direalisasikan oleh BCA akan saya gunakan untuk tujuan kredit,
+                bukan untuk membiayai Perseroan Terbatas atau badan usaha
+                lainnya.
+              </li>
+            </ol>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                name="ceklis_akhir"
+                formControlName="ceklis_akhir"
+                [(ngModel)]="disabledButton"
+              />
+              <label class="custom-control-label" for="customCheck1"
+                >Semua informasi dan dokumen yang saya lampirkan dalam
+                permohonan ini adalah benar dan apabila terdapat perubahan data
+                dalam aplikasi, saya wajib segera memberikan informasi terbaru
+                kepada BCA.</label
+              >
+            </div>
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button
+                (click)="kirimDataKPR()"
+                [disabled]="!disabledButton"
+                class="btn btn-primary m-1"
+              >
+                Ajukan KPR
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Kembali</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step> -->
+      </mat-stepper>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

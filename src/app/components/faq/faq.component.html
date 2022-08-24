@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <section class="section-services section-t8">
+    <h2>Frequently Asked Questions</h2>
+    <hr />
+    <div class="container">
+      <ol>
+        <!-- li yang di for each -->
+        <li *ngFor="let fad of faqData">
+          <p>Pertanyaan : {{ fad.question }}</p>
+          <p>Jawaban : {{ fad.answer }}</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

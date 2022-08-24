@@ -1,0 +1,502 @@
+<mat-card *ngIf="!isExist">
+  <mat-card-title>Kartu Tanda Penduduk (KTP)</mat-card-title>
+  <div class="alert alert-danger" role="alert">
+    <div style="color: white">
+      Anda belum memiliki data KTP. Daftarkan KTP Anda dengan klik tombol Tambah
+      KTP di bawah.
+    </div>
+  </div>
+
+  <mat-card-actions align="end">
+    <button
+      mat-raised-button
+      color="primary"
+      data-bs-toggle="modal"
+      data-bs-target="#modal-form"
+    >
+      <mat-icon>upload</mat-icon> Tambah Data KTP
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="isExist">
+  <mat-card-title>Kartu Tanda Penduduk (KTP)</mat-card-title>
+  <br />
+  <div class="row" *ngIf="ktpData.path == null">
+    <div class="alert alert-danger" role="alert">
+      <div style="color: white">
+        Anda diwajibkan mengunggah file scan/foto KTP dengan klik tombol
+        <strong>Upload File KTP</strong> di bawah.
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="ktpData.notes != null">
+    <div class="alert alert-danger" role="alert">
+      <div style="color: white">
+        {{ ktpData.notes }}
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="row-mt-4 d-flex align-items-center justify-content-center">
+    <div *ngIf="ktpData.path == null">
+      <img
+        src="https://alfatihmakassar.sch.id/wp-content/uploads/2020/01/placeholder-1.png"
+        alt=""
+        class="img-ktp"
+        style="max-width: 300px; max-height: 200px"
+      />
+      <div class="d-flex align-items-center justify-content-center mt-4">
+        <button
+          mat-raised-button
+          color="primary"
+          data-bs-toggle="modal"
+          data-bs-target="#file-form"
+        >
+          <mat-icon>add</mat-icon> Upload File KTP
+        </button>
+      </div>
+    </div>
+    <div *ngIf="ktpData.path != null">
+      <img
+        src="{{ ktpData.path }}"
+        alt=""
+        class="img-ktp"
+        style="max-width: 300px; max-height: 200px"
+      />
+      <div class="d-flex align-items-center justify-content-center mt-4">
+        <button
+          mat-raised-button
+          color="primary"
+          data-bs-toggle="modal"
+          data-bs-target="#file-form"
+        >
+          <mat-icon>add</mat-icon> Update File KTP
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table align-items-center mb-0">
+          <tbody>
+            <tr>
+              <th scope="row">NIK</th>
+              <td>{{ ktpData.ktpNo }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Nama</th>
+              <td>{{ ktpData.namaLengkap }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tempat/ Tanggal Lahir</th>
+              <td>{{ ktpData.birthPlace }}, {{ ktpData.birthDate }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Jenis Kelamin</th>
+              <td>{{ ktpData.gender }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Alamat</th>
+              <td>{{ ktpData.address }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Pekerjaan</th>
+              <td>{{ ktpData.job }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Berlaku Hingga</th>
+              <td *ngIf="ktpData.isForever">Seumur hidup</td>
+              <td *ngIf="!ktpData.isForever">{{ ktpData.expireDate }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tanggal Disimpan</th>
+              <td>{{ ktpData.dateUpdated | date: "medium" }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Status Verifikasi</th>
+              <td>
+                <span
+                  class="badge bg-gradient-warning"
+                  *ngIf="!ktpData.isApproved && ktpData.notes == null"
+                  >Pending</span
+                >
+                <span
+                  class="badge bg-gradient-danger"
+                  *ngIf="!ktpData.isApproved && ktpData.notes != null"
+                  >Rejected</span
+                >
+                <span
+                  class="badge bg-gradient-success"
+                  *ngIf="ktpData.isApproved"
+                  >Approved</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="warn" (click)="deleteKtp()">
+      <mat-icon>delete</mat-icon> Hapus
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      data-bs-toggle="modal"
+      data-bs-target="#modal-form"
+      *ngIf="ktpData.id != null"
+      (click)="openEditModal()"
+    >
+      <mat-icon>upload</mat-icon> Edit Data KTP
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<div class="col-md-4">
+  <div
+    class="modal fade"
+    id="file-form"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="file-form"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <p class="mb-0">Tambah File Kartu Tanpa Penduduk (KTP)</p>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="fileKtpForm" (ngSubmit)="addKtpFile()">
+                <label>File KTP</label>
+                <div class="input-group mb-3">
+                  <input
+                    type="file"
+                    class="form-control"
+                    name="img"
+                    id="img"
+                    (change)="onFileChange($event)"
+                  />
+                </div>
+                <div
+                  class="row-mt-4 d-flex align-items-center justify-content-center mb-4"
+                >
+                  <img
+                    [src]="imageSrc"
+                    *ngIf="imageSrc"
+                    style="max-width: 300px; max-height: 200px"
+                  />
+                </div>
+                <div class="text-center">
+                  <button mat-raised-button color="primary" class="mb-3">
+                    <mat-icon>save</mat-icon> Simpan
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Add Modal-->
+
+<div class="col-md-4">
+  <div
+    class="modal fade"
+    id="modal-form"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modal-form"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <p class="mb-0">Tambah Kartu Tanpa Penduduk (KTP)</p>
+            </div>
+            <div class="card-body">
+              <form
+                [formGroup]="ktpForm"
+                (ngSubmit)="!isExist ? addKtp() : updateKtp()"
+              >
+                <label>NIK</label>
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="NIK Sesuai KTP"
+                    name="ktpNo"
+                    formControlName="ktpNo"
+                  />
+                </div>
+                <label>Nama Lengkap</label>
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nama Lengkap Sesuai KTP"
+                    name="namaLengkap"
+                    formControlName="namaLengkap"
+                  />
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Tempat Lahir</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Tempat Lahir Sesuai KTP"
+                        name="birthPlace"
+                        formControlName="birthPlace"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Tanggal Lahir</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="date"
+                        class="form-control"
+                        placeholder="Tanggal Lahir Sesuai KTP"
+                        name="birthDate"
+                        formControlName="birthDate"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>Masa Berlaku KTP</label>
+                    <div class="form-check form-switch mb-3">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="flexSwitchCheckDefault"
+                        checked=""
+                        name="isForever"
+                        formControlName="isForever"
+                        (change)="isForeverChanged()"
+                      />
+                      <label class="custom-control-label" for="customCheck1"
+                        >Seumur hidup</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <label> </label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="date"
+                        class="form-control"
+                        name="expireDate"
+                        formControlName="expireDate"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Jenis Kelamin</label>
+                    <div class="input-group mb-3">
+                      <select
+                        class="form-control"
+                        name="gender"
+                        formControlName="gender"
+                      >
+                        <option value="L">Laki-laki</option>
+                        <option value="P">Perempuan</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Pekerjaan</label>
+                    <div class="input-group mb-3">
+                      <select
+                        class="form-control"
+                        name="job"
+                        formControlName="job"
+                      >
+                        <option disabled value="">Pilih Pekerjaan</option>
+                        <option>Belum / Tidak Bekerja</option>
+                        <option>Mengurus Rumah Tangga</option>
+                        <option>Pelajar / Mahasiswa</option>
+                        <option>Pensiunan</option>
+                        <option>Pegawai Negeri Sipil</option>
+                        <option>Tentara Nasional Indonesia</option>
+                        <option>Kepolisian RI</option>
+                        <option>Perdagangan</option>
+                        <option>Petani / Pekebun</option>
+                        <option>Peternak</option>
+                        <option>Nelayan / Perikanan</option>
+                        <option>Industri</option>
+                        <option>Konstruksi</option>
+                        <option>Transportasi</option>
+                        <option>Karyawan Swasta</option>
+                        <option>Karyawan BUMN</option>
+                        <option>Karyawan BUMD</option>
+                        <option>Karyawan Honorer</option>
+                        <option>Buruh Harian Lepas</option>
+                        <option>Buruh Tani / Perkebunan</option>
+                        <option>Buruh Nelayan / Perikanan</option>
+                        <option>Buruh Peternakan</option>
+                        <option>Pembantu Rumah Tangga</option>
+                        <option>Tukang Cukur</option>
+                        <option>Tukang Listrik</option>
+                        <option>Tukang Batu</option>
+                        <option>Tukang Kayu</option>
+                        <option>Tukang Sol Sepatu</option>
+                        <option>Tukang Las / Pandai Besi</option>
+                        <option>Tukang Jahit</option>
+                        <option>Penata Rambut</option>
+                        <option>Penata Rias</option>
+                        <option>Penata Busana</option>
+                        <option>Mekanik</option>
+                        <option>Tukang Gigi</option>
+                        <option>Seniman</option>
+                        <option>Tabib</option>
+                        <option>Paraji</option>
+                        <option>Perancang Busana</option>
+                        <option>Penterjemah</option>
+                        <option>Imam Masjid</option>
+                        <option>Pendeta</option>
+                        <option>Pastur</option>
+                        <option>Wartawan</option>
+                        <option>Ustadz / Mubaligh</option>
+                        <option>Juru Masak</option>
+                        <option>Promotor Acara</option>
+                        <option>Anggota DPR-RI</option>
+                        <option>Anggota DPD</option>
+                        <option>Anggota BPK</option>
+                        <option>Presiden</option>
+                        <option>Wakil Presiden</option>
+                        <option>Anggota Mahkamah Konstitusi</option>
+                        <option>Anggota Kabinet / Kementerian</option>
+                        <option>Duta Besar</option>
+                        <option>Gubernur</option>
+                        <option>Wakil Gubernur</option>
+                        <option>Bupati</option>
+                        <option>Wakil Bupati</option>
+                        <option>Walikota</option>
+                        <option>Wakil Walikota</option>
+                        <option>Anggota DPRD Propinsi</option>
+                        <option>Anggota DPRD Kabupaten / Kota</option>
+                        <option>Dosen</option>
+                        <option>Guru</option>
+                        <option>Pilot</option>
+                        <option>Pengacara</option>
+                        <option>Notaris</option>
+                        <option>Arsitek</option>
+                        <option>Akuntan</option>
+                        <option>Konsultan</option>
+                        <option>Dokter</option>
+                        <option>Bidan</option>
+                        <option>Perawat</option>
+                        <option>Apoteker</option>
+                        <option>Psikiater / Psikolog</option>
+                        <option>Penyiar Televisi</option>
+                        <option>Penyiar Radio</option>
+                        <option>Pelaut</option>
+                        <option>Peneliti</option>
+                        <option>Sopir</option>
+                        <option>Pialang</option>
+                        <option>Paranormal</option>
+                        <option>Pedagang</option>
+                        <option>Perangkat Desa</option>
+                        <option>Kepala Desa</option>
+                        <option>Biarawati</option>
+                        <option>Wiraswasta</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Provinsi</label>
+                    <div class="input-group mb-3">
+                      <select
+                        class="form-control"
+                        name="province"
+                        formControlName="province"
+                        (change)="provinceChanged()"
+                      >
+                        <option value="">Pilih Provinsi</option>
+                        <option
+                          *ngFor="let province of provinceData"
+                          [value]="province.name"
+                        >
+                          {{ province.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Kota</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Pilih Kota"
+                        *ngIf="cityData.length === 0"
+                        readonly
+                      />
+                      <select
+                        class="form-control"
+                        name="city"
+                        formControlName="city"
+                        *ngIf="cityData.length !== 0"
+                      >
+                        <option value="" disabled>Pilih Kota</option>
+                        <option
+                          *ngFor="let city of cityData"
+                          [value]="city.name"
+                        >
+                          {{ city.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <label>Alamat</label>
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Alamat tempat tinggal sesuai KTP"
+                    name="address"
+                    formControlName="address"
+                  />
+                </div>
+
+                <div class="text-center">
+                  <button
+                    type="submit"
+                    class="btn bg-gradient-primary"
+                    value="Submit"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

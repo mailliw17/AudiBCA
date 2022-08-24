@@ -1,0 +1,115 @@
+<mat-card>
+  <mat-card-title>Ganti Profil</mat-card-title>
+
+  <form action="">
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nama Depan</mat-label>
+        <input matInput type="text" [(ngModel)]="editUserForm.firstName" name="firstName" />
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi nama depan anda sesuai KTP</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nama Belakang</mat-label>
+        <input matInput type="text" [(ngModel)]="editUserForm.lastName" name="lastName" />
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi nama belakang anda sesuai KTP</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Jenis Kelamin</mat-label>
+        <mat-select [(ngModel)]="editUserForm.gender" name="gender">
+          <mat-option [value]="'LAKI'">
+            Laki-laki
+          </mat-option>
+          <mat-option [value]="'PEREMPUAN'">
+            Perempuan
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi jenis kelamin anda sesuai KTP</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" [(ngModel)]="editUserForm.email" name="email" />
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-hint>Isi email aktif anda untuk aktivasi</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nomor HP</mat-label>
+        <input matInput type="text" [(ngModel)]="editUserForm.phoneNum" name="phoneNum" />
+        <mat-icon matSuffix>contacts</mat-icon>
+        <mat-hint>Isi nomor HP aktif anda</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Tanggal Lahir</mat-label>
+        <input matInput type="date" [(ngModel)]="editUserForm.dateOb" name="dateOb" />
+        <mat-icon matSuffix>date_range</mat-icon>
+        <mat-hint>Isi tanggal lahir anda sesuai KTP</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Penghasilan</mat-label>
+        <mat-select [(ngModel)]="editUserForm.income" name="income">
+          <mat-option [value]="'0 - <= 15 Juta'">
+            0 - <= 15 Juta </mat-option>
+              <mat-option [value]="'> 15 Juta - <= 25 Juta'">
+                > 15 Juta - <= 25 Juta </mat-option>
+                  <mat-option [value]="'> 25 Juta - <= 400 Juta'">
+                    > 25 Juta - <= 400 Juta </mat-option>
+                      <mat-option [value]="'> 400 Juta'">
+                        > 400 Juta
+                      </mat-option>
+                      <mat-option [value]="'0 - 50.000.000'">
+                        0 - 50.000.000
+                      </mat-option>
+                      <mat-option [value]="'50.000.001-250 JUTA'">
+                        50.000.001-250 JUTA
+                      </mat-option>
+                      <mat-option [value]="'250.000.001-500 JUTA'">
+                        250.000.001-500 JUTA
+                      </mat-option>
+                      <mat-option [value]="'500.000.001-1,5 M'">
+                        500.000.001-1,5 M
+                      </mat-option>
+                      <mat-option [value]="'> 1,5 M'">
+                        > 1,5 M
+                      </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi jenis kelamin anda sesuai KTP</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Jumlah Pinjaman</mat-label>
+        <input matInput type="number" [(ngModel)]="editUserForm.loanAmount" name="loanAmount" />
+        <mat-icon matSuffix>contacts</mat-icon>
+        <mat-hint>Isi perkiraan jumlah pinjaman yang akan anda ajukan</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="updateUserData()">
+        <mat-icon>edit</mat-icon> Ganti Profil
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

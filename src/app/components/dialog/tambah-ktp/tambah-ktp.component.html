@@ -1,0 +1,121 @@
+<div class="pt-5">
+
+    <h1 mat-dialog-title>Tambah Kartu Tanda Penduduk (KTP)</h1>
+    <div mat-dialog-content>
+        <p>
+            <mat-form-field appearance="standard" class="example-full-width">
+                <mat-label>Nomor KTP (NIK)</mat-label>
+                <input matInput type="number">
+            </mat-form-field>
+        </p>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="standard" class="example-full-width">
+                    <mat-label>Tempat Lahir</mat-label>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="standard" class="example-full-width">
+                    <mat-label>Tanggal Lahir</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-hint>Klik icon kalender</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="standard" class="example-full-width">
+                    <mat-label>Jenis Kelamin</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let jk of pilihanJeniskelamin" [value]="jk.value">
+                            {{jk.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="standard" class="example-full-width">
+                    <mat-label>Pekerjaan</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let pek of pilihanPekerjaan" [value]="pek.value">
+                            {{pek.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="standard" class="example-full-width">
+                    <mat-label>Pilih Provinsi</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let provinsi of pilihanProvinsi" [value]="provinsi.value">
+                            {{provinsi.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="standard" class="example-full-width">
+                    <mat-label>Pilih Kota</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let kota of pilihanKota" [value]="kota.value">
+                            {{kota.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <p>
+            <mat-form-field appearance="standard" class="example-full-width">
+                <mat-label>Alamat</mat-label>
+                <input matInput type="text">
+                <mat-hint>Isi dengan alamat sesuai KTP</mat-hint>
+            </mat-form-field>
+        </p>
+
+        <div class="row">
+            <div class="col">
+                <h4>Masa berlaku KTP</h4>
+                <mat-checkbox [formControl]="disableSelect">Seumur hidup</mat-checkbox>
+            </div>
+            <div class="col">
+
+                <mat-form-field appearance="standard" class="example-full-width">
+                    <mat-label>Berlaku hingga</mat-label>
+                    <input matInput [matDatepicker]="picker2" [disabled]="disableSelect.value">
+                    <mat-hint>Klik icon kalender</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="disableSelect.value">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <mat-form-field appearance="standard" class="example-full-width">
+            <mat-label>Kantor Pemeriksa KTP</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let kpKtp of pilihanKantorPemeriksaKtp" [value]="kpKtp.value">
+                    {{kpKtp.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- <div class="alert alert-primary example-half-width" role="alert">
+        Setelah menyimpan data KTP, Anda diwajibkan mengunggah file scan/foto KTP dengan klik tombol Upload File
+        KTP
+        yang muncul setelah halaman dimuat ulang.
+    </div> -->
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button (click)="onNoClick()" color="warn">Batal</button>
+        <button mat-raised-button color="primary">Simpan</button>
+    </div>
+</div>

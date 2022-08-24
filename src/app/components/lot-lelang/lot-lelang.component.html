@@ -1,0 +1,145 @@
+<app-navbar></app-navbar>
+<main class="main-content">
+  <!-- ======= Intro Single ======= -->
+  <section class="section-services section-t8 mb-3">
+    <div class="container">
+      <mat-card>
+        <h2>Filter Lot Lelang</h2>
+        <hr />
+        <form [formGroup]="filterForm" (ngSubmit)="filtering()">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="sr-only" for="inlineFormInputGroup">Harga minimum</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Rp</div>
+                </div>
+                <input currencyMask class="form-control" id="startPrice" formControlName="startPrice"
+                  [options]="options" />
+              </div>
+              <label class="sr-only" for="inlineFormInputGroup">Harga maximum</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Rp</div>
+                </div>
+                <input currencyMask class="form-control" id="endPrice" formControlName="endPrice" [options]="options" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Pilih Provinsi</label>
+                <select class="form-control" id="province" name="province" formControlName="province"
+                  (change)="provinceChanged()">
+                  <option value="" disabled>Pilih Provinsi</option>
+                  <option *ngFor="let province of provinceData" [value]="province.name">
+                    {{ province.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group mt-2">
+                <label for="exampleFormControlSelect1">Pilih Kota</label>
+                <input type="text" class="form-control" placeholder="Pilih Kota" *ngIf="cityData.length === 0"
+                  readonly />
+                <select class="form-control" id="city" name="city" formControlName="city" *ngIf="cityData.length !== 0">
+                  <option value="" disabled>Pilih Kota</option>
+                  <option *ngFor="let city of cityData" [value]="city.name">
+                    {{ city.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div align="end" class="mt-2">
+                <button class="btn btn-primary" type="submit">
+                  <i class="bi bi-funnel"></i> Terapkan
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </section>
+  <!-- End Intro Single-->
+
+  <!-- ======= Property Grid ======= -->
+  <section class="property-grid grid">
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-sm-12">
+          <div class="grid-option">
+            <form>
+              <select class="custom-select">
+                <option selected>All</option>
+                <option value="1">New to Old</option>
+                <option value="2">For Rent</option>
+                <option value="3">For Sale</option>
+              </select>
+            </form>
+          </div>
+        </div> -->
+        <!-- KALAU FILTERING TIDAK ADA ITEM -->
+        <div class="col-md-12 text-center" *ngIf="dataAuctionObject.length == 0">
+          <div class="alert alert-warning text-white" role="alert">
+            Maaf, properti yang anda cari belum tersedia...
+          </div>
+        </div>
+        <!-- INI MAU DI FOREACH -->
+        <div class="col-md-4" *ngFor="let dao of dataAuctionObject">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="{{ dao.image }}" alt="" class="img-a img-fluid" style="height: 600px" />
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="#">{{ dao.name }}</a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a" style="font-size: 10pt">
+                      <i class="bi bi-geo-alt"></i>
+                      {{ dao.organizerName.substr(6) }} | Rp
+                      {{ dao.initialPrice | number: "1.2-2" }}
+                    </span>
+                  </div>
+                  <a routerLink="/lot-lelang/detail/{{ dao.id }}" class="link-a">Detail
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <nav class="pagination-a">
+            <ul class="pagination justify-content-end">
+              <li class="page-item">
+                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: currPage - 0 }" tabindex="-1"
+                  *ngIf="currPage - 0 == 1">
+                  <span class="bi bi-chevron-left"></span>
+                </a>
+              </li>
+              <li class="page-item" *ngFor="let page of [].constructor(pages); let i = index"
+                [class.active]="i === currPage">
+                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: i + 1 }">{{ i + 1 }}</a>
+              </li>
+              <li class="page-item next">
+                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: currPage + 2 }"
+                  *ngIf="currPage + 2 <= pages">
+                  <span class="bi bi-chevron-right"></span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End Property Grid Single-->
+<app-footer></app-footer>

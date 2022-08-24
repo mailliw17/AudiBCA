@@ -1,0 +1,113 @@
+<body class="">
+  <main class="main-content mt-0">
+    <section class="">
+      <div class="page-header min-vh-100">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto"
+            >
+              <div class="card card-plain">
+                <div class="card-header pb-0 text-start">
+                  <h4 class="font-weight-bolder">Login</h4>
+                  <p class="mb-0">Masukan email dan password</p>
+                </div>
+                <div class="card-body">
+                  <form
+                    role="form"
+                    *ngIf="!isLoggedIn"
+                    name="form"
+                    (ngSubmit)="f.form.valid && onSubmit()"
+                    #f="ngForm"
+                    novalidate
+                  >
+                    <div class="mb-3">
+                      <input
+                        type="email"
+                        class="form-control form-control-lg"
+                        id="email"
+                        name="email"
+                        placeholder="Masukkan email anda"
+                        required
+                        [(ngModel)]="form.email"
+                        #email="ngModel"
+                      />
+                    </div>
+
+                    <div
+                      class="alert alert-danger text-white"
+                      role="alert"
+                      *ngIf="email.errors && f.submitted"
+                    >
+                      Username is required!
+                    </div>
+
+                    <div class="mb-3">
+                      <input
+                        type="password"
+                        class="form-control form-control-lg"
+                        id="password"
+                        name="password"
+                        placeholder="Masukkan password anda"
+                        required
+                        [(ngModel)]="form.password"
+                        #password="ngModel"
+                      />
+                    </div>
+
+                    <div
+                      class="alert alert-danger text-white"
+                      role="alert"
+                      *ngIf="password.errors && f.submitted"
+                    >
+                      Password is required
+                    </div>
+
+                    <div class="text-center">
+                      <button
+                        class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                      >
+                        Login
+                      </button>
+                    </div>
+
+                    <div class="form-group mt-3">
+                      <div
+                        class="alert alert-danger text-white"
+                        role="alert"
+                        *ngIf="f.submitted && isLoginFailed"
+                      >
+                        Login failed : {{ errorMessage }}
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column"
+            >
+              <div
+                class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                style="
+                  background-image: url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+                  background-size: cover;
+                "
+              >
+                <span class="mask bg-gradient-primary opacity-6"></span>
+                <h2 class="mt-5 text-white position-relative">
+                  Belum punya akun ?
+                </h2>
+                <p class="text-white position-relative">
+                  <button class="btn btn-success" routerLink="/register">
+                    <i class="bi bi-box-arrow-in-right"></i> &nbsp; Daftar
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>

@@ -1,0 +1,15 @@
+.example-half-width {
+    width: 75%;
+    margin-left: 10%;
+}
+
+.img-ktp {
+    height: 200px;
+    width: 300px;
+}
+
+.alert-upload-ktp {
+    margin-top: 10%;
+    margin-left: 10%;
+    text-align: center;
+}

@@ -1,0 +1,89 @@
+<!-- ======= Header/Navbar ======= -->
+<nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+  <div class="container">
+    <button
+      class="navbar-toggler collapsed"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarDefault"
+      aria-controls="navbarDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a class="navbar-brand text-brand" routerLink="/"
+      >audi<span class="color-b">BCA</span></a
+    >
+
+    <div
+      class="navbar-collapse collapse justify-content-center"
+      id="navbarDefault"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" routerLink="/home" id="home">Home</a>
+        </li>
+
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" routerLink="/lot-lelang" id="lot">Lot Lelang</a>
+        </li>
+
+        <li class="nav-item dropdown" [routerLinkActive]="['active']">
+          <a
+            class="nav-link"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Lainnya <i class="bi bi-chevron-down"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/syarat-dan-ketentuan"
+              >Syarat & Ketentuan</a
+            >
+            <a class="dropdown-item" routerLink="/faq"
+              >FAQ <i class="ni ni-air-baloon"></i
+            ></a>
+          </div>
+        </li>
+        <!-- <li class="nav-item">
+                    <a class="nav-link " href="contact.html">Contact</a>
+                </li> -->
+      </ul>
+    </div>
+
+    <a
+      type="button"
+      *ngIf="isLoggedIn == true"
+      routerLink="/status-lelang"
+      class="text-white btn btn-primary navbar-toggle-box navbar-toggle-box-collapse m-1"
+    >
+      Selamat datang, {{ currentUser?.firstName }}
+      <i class="bi bi-person-badge"> </i>
+    </a>
+
+    <a
+      (click)="logout()"
+      type="button"
+      class="btn btn-danger navbar-toggle-box navbar-toggle-box-collapse m-1"
+      *ngIf="isLoggedIn == true"
+    >
+      <i class="bi bi-box-arrow-right"> </i>&nbsp; Keluar
+    </a>
+
+    <a
+      routerLink="/login"
+      type="button"
+      class="btn btn-b"
+      *ngIf="isLoggedIn == false"
+    >
+      Masuk
+    </a>
+  </div>
+</nav>
+<!-- End Header/Navbar -->

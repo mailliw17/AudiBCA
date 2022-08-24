@@ -1,0 +1,129 @@
+<body class="">
+  <main class="main-content mt-0">
+    <section class="">
+      <div class="page-header min-vh-100">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xl-6 col-lg-5 col-md-12 d-flex flex-column mx-lg-0 mx-auto">
+              <div class="card card-plain">
+                <div class="card-header pb-0 text-start">
+                  <h4 class="font-weight-bolder">Pendaftaran Penggunaan Baru</h4>
+                  <p class="alert alert-primary text-white" style="text-align:center;">
+                    Silakan lengkapi form pendaftaran berikut. Akun pengguna yang
+                    didaftarkan harus atas nama perorangan, apabila Anda akan bertindak
+                    sebagai kuasa dari perusahaan/badan hukum, akan ada pilihan dan isian
+                    tambahan pada saat mengikuti lelang.
+                  </p>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Nama Depan</label>
+                          <input type="text" class="form-control" autocomplete="off" formControlName="firstName" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Nama Belakang</label>
+                          <input type="text" class="form-control" autocomplete="off" formControlName="lastName" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Email</label>
+                          <input type="email" class="form-control" autocomplete="off" formControlName="email" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Username</label>
+                          <input type="text" class="form-control" autocomplete="off" formControlName="username" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">No HP</label>
+                          <input type="number" class="form-control" autocomplete="off" formControlName="phoneNum" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Tanggal Lahir</label>
+                          <input type="date" class="form-control" autocomplete="off" formControlName="dateOb" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Jenis Kelamin</label>
+                          <select name="gender" id="gender" class="form-control" formControlName="gender">
+                            <option value="" default disabled>Pilih Jenis Kelamin</option>
+                            <option value="LAKI">Laki-laki</option>
+                            <option value="PEREMPUAN">Perempuan</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Password</label>
+                          <input type="password" class="form-control" formControlName="password" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Ulangi Password</label>
+                          <input type="password" class="form-control" formControlName="scdPassword" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">
+                        Daftar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+              <div
+                class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                style="
+                  background-image: url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+                  background-size: cover;
+                ">
+                <span class="mask bg-gradient-primary opacity-6"></span>
+                <h2 class="mt-5 text-white position-relative">
+                  Sudah punya akun ?
+                </h2>
+                <p class="text-white position-relative">
+                  <button class="btn btn-success" routerLink="/login">
+                    <i class="bi bi-box-arrow-in-right"></i> &nbsp; Masuk
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
