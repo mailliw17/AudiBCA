@@ -1,6 +1,6 @@
-# Frontend Lelang - User
+# Auction Digital - BCA - User
 
-## By audiBCA - BIT19
+## By BIT19
 
 > Hope this way can make our integration come easier dude
 
