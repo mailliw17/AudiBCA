@@ -9,8 +9,10 @@ import { Province } from 'src/app/_class/province';
 import { AddressService } from 'src/app/_services/address.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const CREATE_KPR_API = 'http://10.1.137.50:8774/create';
-const STORE_BERKAS_API = 'http://10.1.137.50:8774/createDokumen/';
+const CREATE_KPR_API =
+  'http://kpr-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/create';
+const STORE_BERKAS_API =
+  'http://kpr-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/createDokumen/';
 
 @Component({
   selector: 'app-form-kpr-tambah',

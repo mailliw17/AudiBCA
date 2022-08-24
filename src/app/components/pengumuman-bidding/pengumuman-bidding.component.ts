@@ -6,11 +6,16 @@ import { firstValueFrom } from 'rxjs';
 import { ProfileService } from 'src/app/_services/profile.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
-const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
-const CREATE_VA_API = 'http://10.1.137.50:8772/create?category=pelunasan';
-const CAN_USER_KRP_API = 'http://10.1.138.138:1111/CreditScoreByKTP/';
-const GET_KTP_BY_USERID_API = 'http://10.1.137.50:8761/ktp/user/';
+const GET_BIDDING_BY_AOID_API =
+  'http://bidding-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/getByAuctionObj/';
+const GET_DETAIL_API =
+  'http://auction-object-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/get/';
+const CREATE_VA_API =
+  'http://virtuall-account-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/create?category=pelunasan';
+const CAN_USER_KRP_API =
+  'http://creditscoringroute-website-lelang-bca-dev.apps.ocpdev.dti.co.idCreditScoreByKTP/';
+const GET_KTP_BY_USERID_API =
+  ' http://ktp-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/ktp/user/';
 
 @Component({
   selector: 'app-pengumuman-bidding',

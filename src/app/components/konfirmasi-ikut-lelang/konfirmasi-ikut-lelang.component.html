@@ -26,9 +26,26 @@
         <p><a routerLink="/register">klik di sini</a> untuk mendaftar.</p>
       </div>
     </div>
+
+    <div class="row" *ngIf="dataKtp == 0 || dataNpwp == 0">
+      <div
+        class="alert alert-danger text-white text-center text-lg"
+        role="alert"
+      >
+        <p>
+          Anda diharuskan menggungah berkas KTP, NPWP dan Nomor Rekening
+          terlebih dahulu
+        </p>
+
+        <p><a routerLink="/profil/ktp">Klik di sini</a> melengkapi berkas</p>
+      </div>
+    </div>
   </div>
 
-  <section class="property-single nav-arrow-b" *ngIf="isLoggedIn == true">
+  <section
+    class="property-single nav-arrow-b"
+    *ngIf="isLoggedIn == true && dataKtp !== 0 && dataNpwp !== 0"
+  >
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">

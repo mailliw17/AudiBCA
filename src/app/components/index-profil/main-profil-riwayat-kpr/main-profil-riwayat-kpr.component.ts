@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const GET_KPR_BY_USERID_API = 'http://10.1.137.50:8774/get/user/';
+const GET_KPR_BY_USERID_API =
+  'http://kpr-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/get/user/';
 
 @Component({
   selector: 'app-main-profil-riwayat-kpr',
@@ -38,7 +39,7 @@ export class MainProfilRiwayatKprComponent implements OnInit {
       .subscribe(
         (isi) => {
           this.kprData = isi;
-          console.log(this.kprData);
+          // console.log(this.kprData);
         },
         (err) => {
           console.log(err);

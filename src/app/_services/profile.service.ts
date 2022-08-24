@@ -5,8 +5,10 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { User } from '../components/navbar/user';
 import { TokenStorageService } from './token-storage.service';
 
-const READ_PROFILE = 'http://10.1.137.50:8760/user/v1/';
-const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
+const READ_PROFILE =
+  'http://user-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/user/v1/';
+const GET_BIDDING_BY_AOID_API =
+  'http://bidding-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/getByAuctionObj/';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +48,7 @@ export class ProfileService {
 
   updateUserData(id: any, user: User): Observable<User> {
     return this.http.put<User>(
-      `${READ_PROFILE}/update/${id}`,
+      `${READ_PROFILE}update/${id}`,
       user,
       this.httpOptions_base
     );
@@ -54,7 +56,7 @@ export class ProfileService {
 
   changePassword(form: any): Observable<User> {
     return this.http.post<User>(
-      `${READ_PROFILE}/change-password`,
+      `${READ_PROFILE}change-password`,
       form,
       this.httpOptions_base
     );

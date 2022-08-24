@@ -12,9 +12,10 @@ import { User } from '../navbar/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const REKOMENDASI_PROPERTI_API =
-  'http://10.1.138.138:6969/getAllRecAuctionById/';
+  'http://recommendation-route-website-lelang-bca-dev.apps.ocpdev.dti.co.id/getAllRecAuctionById/';
 
-const GET_AUCTION_BY_ID = 'http://10.1.137.50:8766/get/';
+const GET_AUCTION_BY_ID =
+  'http://auction-object-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/get/';
 
 @Component({
   selector: 'app-latest-properties',
@@ -42,7 +43,7 @@ export class LatestPropertiesComponent implements OnInit {
     private npwp: NpwpService,
     private rekening: RekeningService,
     private profile: ProfileService,
-    private http: HttpClient,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -143,17 +144,15 @@ export class LatestPropertiesComponent implements OnInit {
         var i = 0;
         this.AuctionObjectId = isi;
         this.isRecommendationExist = true;
-        for(var val of this.AuctionObjectId.AuctionObjectId){
+        for (var val of this.AuctionObjectId.AuctionObjectId) {
           console.log(i);
-          if(i >= 3){
+          if (i >= 3) {
             break;
           } else {
-            this.http.get(GET_AUCTION_BY_ID + val).subscribe(
-              (isi) => {
-                this.dataAuctionObject.push(isi);
-                console.log(this.dataAuctionObject);
-              }
-            );
+            this.http.get(GET_AUCTION_BY_ID + val).subscribe((isi) => {
+              this.dataAuctionObject.push(isi);
+              console.log(this.dataAuctionObject);
+            });
             i = i + 1;
           }
         }

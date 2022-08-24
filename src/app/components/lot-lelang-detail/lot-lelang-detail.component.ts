@@ -8,7 +8,8 @@ import { DetailInfoPenyelenggaraComponent } from '../dialog/detail-info-penyelen
 import { DetailLampiranComponent } from '../dialog/detail-lampiran/detail-lampiran.component';
 import { TokenStorageService } from '../../_services/token-storage.service';
 
-const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
+const GET_DETAIL_API =
+  'http://auction-object-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/get/';
 
 @Component({
   selector: 'app-lot-lelang-detail',
@@ -52,7 +53,7 @@ export class LotLelangDetailComponent implements OnInit {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.http.get<any>(GET_DETAIL_API + id).subscribe(
       (isi) => {
-        console.log(isi);
+        // console.log(isi);
         this.detailDataAuctionObject = isi;
         this.createLogging(isi.id);
       },
@@ -65,15 +66,21 @@ export class LotLelangDetailComponent implements OnInit {
   createLogging(id: any) {
     this.logging.auctionObjectId = id;
     this.logging.userId = this.token.getUser().id;
-    console.log(this.logging);
+    // console.log(this.logging);
     // create post
-    this.http.post('http://10.1.137.50:8771/create', this.logging, this.httpOptions_base).subscribe(
-      (isi) => {
-        console.log(isi);
-      }, (err) => {
-        console.log(err);
-      }
-    );
-
+    this.http
+      .post(
+        'http://logging-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/create',
+        this.logging,
+        this.httpOptions_base
+      )
+      .subscribe(
+        (isi) => {
+          // console.log(isi);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 }

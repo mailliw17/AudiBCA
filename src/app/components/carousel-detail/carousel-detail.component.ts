@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
-const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
+const GET_DETAIL_API =
+  'http://auction-object-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/get/';
 
 @Component({
   selector: 'app-carousel-detail',
@@ -13,7 +14,12 @@ const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
 export class CarouselDetailComponent implements OnInit {
   detailDataAuctionObject: any = {};
   //slides: any[] = [];
-  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
+  slides: any[] = new Array(3).fill({
+    id: -1,
+    src: '',
+    title: '',
+    subtitle: '',
+  });
 
   constructor(
     public dialog: MatDialog,

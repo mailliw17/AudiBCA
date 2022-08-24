@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CurrencyMaskInputMode } from 'ngx-currency';
 import { ProfileService } from 'src/app/_services/profile.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
@@ -11,6 +12,16 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 })
 export class MainProfilGantiNamaComponent implements OnInit {
   editUserForm: any = {};
+
+  options = {
+    prefix: '',
+    thousands: '.',
+    decimal: ',',
+    allowZero: true,
+    inputMode: CurrencyMaskInputMode.FINANCIAL,
+    nullable: true,
+    precision: 0,
+  };
 
   constructor(
     private formBuilder: FormBuilder,

@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { Npwp } from '../components/index-profil/main-profil-npwp/npwp';
 import { TokenStorageService } from './token-storage.service';
 
-const BASE_URL = 'http://10.1.137.50:8761';
+const BASE_URL =
+  'http://ktp-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,7 @@ export class NpwpService {
   updateNpwpData(id: any, npwp: Npwp, file: File): Observable<Npwp> {
     const formData: FormData = new FormData();
     formData.append('npwp', JSON.stringify(npwp));
-    if(file != null){
+    if (file != null) {
       formData.append('file', file);
     }
     return this.http.put<Npwp>(

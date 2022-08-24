@@ -6,7 +6,8 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import Swal from 'sweetalert2';
 import { NavbarComponent } from '../navbar/navbar.component';
 
-const GET_PROFILE = 'http://10.1.137.50:8760/user/v1/';
+const GET_PROFILE =
+  'http://user-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/user/v1/';
 
 @Component({
   selector: 'app-login',

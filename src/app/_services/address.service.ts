@@ -7,7 +7,8 @@ import { City } from '../_class/city';
 import { Kecamatan } from '../_class/kecamatan';
 import { Kelurahan } from '../_class/kelurahan';
 
-const BASE_URL = 'http://10.1.137.50:8770';
+const BASE_URL =
+  'http://address-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id';
 
 @Injectable({
   providedIn: 'root',

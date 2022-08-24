@@ -4,11 +4,16 @@ import { FormBuilder, FormControl, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
-const GET_KTP_API = 'http://10.1.137.50:8761/ktp/user/';
-const GET_NPWP_API = 'http://10.1.137.50:8761/npwp/user/';
-const CREATE_VA_API = 'http://10.1.137.50:8772/create?category=jaminan';
-const GET_REKENING_DATA_API = 'http://10.1.137.50:8761/rekening/user/';
+const GET_DETAIL_API =
+  'http://auction-object-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/get/';
+const GET_KTP_API =
+  'http://ktp-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/ktp/user/';
+const GET_NPWP_API =
+  'http://ktp-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/npwp/user/';
+const CREATE_VA_API =
+  'http://virtuall-account-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/create?category=jaminan';
+const GET_REKENING_DATA_API =
+  'http://ktp-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/rekening/user/';
 
 @Component({
   selector: 'app-konfirmasi-ikut-lelang',

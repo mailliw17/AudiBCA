@@ -9,29 +9,52 @@
         <form [formGroup]="filterForm" (ngSubmit)="filtering()">
           <div class="row">
             <div class="col-md-6">
-              <label class="sr-only" for="inlineFormInputGroup">Harga minimum</label>
+              <label class="sr-only" for="inlineFormInputGroup"
+                >Harga minimum</label
+              >
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text">Rp</div>
                 </div>
-                <input currencyMask class="form-control" id="startPrice" formControlName="startPrice"
-                  [options]="options" />
+                <input
+                  currencyMask
+                  class="form-control"
+                  id="startPrice"
+                  formControlName="startPrice"
+                  [options]="options"
+                />
               </div>
-              <label class="sr-only" for="inlineFormInputGroup">Harga maximum</label>
+              <label class="sr-only" for="inlineFormInputGroup"
+                >Harga maximum</label
+              >
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text">Rp</div>
                 </div>
-                <input currencyMask class="form-control" id="endPrice" formControlName="endPrice" [options]="options" />
+                <input
+                  currencyMask
+                  class="form-control"
+                  id="endPrice"
+                  formControlName="endPrice"
+                  [options]="options"
+                />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Pilih Provinsi</label>
-                <select class="form-control" id="province" name="province" formControlName="province"
-                  (change)="provinceChanged()">
+                <select
+                  class="form-control"
+                  id="province"
+                  name="province"
+                  formControlName="province"
+                  (change)="provinceChanged()"
+                >
                   <option value="" disabled>Pilih Provinsi</option>
-                  <option *ngFor="let province of provinceData" [value]="province.name">
+                  <option
+                    *ngFor="let province of provinceData"
+                    [value]="province.name"
+                  >
                     {{ province.name }}
                   </option>
                 </select>
@@ -39,9 +62,20 @@
 
               <div class="form-group mt-2">
                 <label for="exampleFormControlSelect1">Pilih Kota</label>
-                <input type="text" class="form-control" placeholder="Pilih Kota" *ngIf="cityData.length === 0"
-                  readonly />
-                <select class="form-control" id="city" name="city" formControlName="city" *ngIf="cityData.length !== 0">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Pilih Kota"
+                  *ngIf="cityData.length === 0"
+                  readonly
+                />
+                <select
+                  class="form-control"
+                  id="city"
+                  name="city"
+                  formControlName="city"
+                  *ngIf="cityData.length !== 0"
+                >
                   <option value="" disabled>Pilih Kota</option>
                   <option *ngFor="let city of cityData" [value]="city.name">
                     {{ city.name }}
@@ -79,7 +113,10 @@
           </div>
         </div> -->
         <!-- KALAU FILTERING TIDAK ADA ITEM -->
-        <div class="col-md-12 text-center" *ngIf="dataAuctionObject.length == 0">
+        <div
+          class="col-md-12 text-center"
+          *ngIf="dataAuctionObject.length == 0"
+        >
           <div class="alert alert-warning text-white" role="alert">
             Maaf, properti yang anda cari belum tersedia...
           </div>
@@ -88,7 +125,12 @@
         <div class="col-md-4" *ngFor="let dao of dataAuctionObject">
           <div class="card-box-a card-shadow">
             <div class="img-box-a">
-              <img src="{{ dao.image }}" alt="" class="img-a img-fluid" style="height: 600px" />
+              <img
+                src="{{ dao.image }}"
+                alt=""
+                class="img-a img-fluid"
+                style="height: 600px"
+              />
             </div>
             <div class="card-overlay">
               <div class="card-overlay-a-content">
@@ -105,7 +147,8 @@
                       {{ dao.initialPrice | number: "1.2-2" }}
                     </span>
                   </div>
-                  <a routerLink="/lot-lelang/detail/{{ dao.id }}" class="link-a">Detail
+                  <a routerLink="/lot-lelang/detail/{{ dao.id }}" class="link-a"
+                    >Detail
                     <span class="bi bi-chevron-right"></span>
                   </a>
                 </div>
@@ -119,18 +162,35 @@
           <nav class="pagination-a">
             <ul class="pagination justify-content-end">
               <li class="page-item">
-                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: currPage - 0 }" tabindex="-1"
-                  *ngIf="currPage - 0 == 1">
+                <a
+                  class="page-link"
+                  [routerLink]="['/lot-lelang']"
+                  [queryParams]="{ page: currPage - 0 }"
+                  tabindex="-1"
+                  *ngIf="currPage - 0 == 1"
+                >
                   <span class="bi bi-chevron-left"></span>
                 </a>
               </li>
-              <li class="page-item" *ngFor="let page of [].constructor(pages); let i = index"
-                [class.active]="i === currPage">
-                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: i + 1 }">{{ i + 1 }}</a>
+              <li
+                class="page-item"
+                *ngFor="let page of [].constructor(pages); let i = index"
+                [class.active]="i === currPage"
+              >
+                <a
+                  class="page-link"
+                  [routerLink]="['/lot-lelang']"
+                  [queryParams]="{ page: i + 1 }"
+                  >{{ i + 1 }}</a
+                >
               </li>
               <li class="page-item next">
-                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: currPage + 2 }"
-                  *ngIf="currPage + 2 <= pages">
+                <a
+                  class="page-link"
+                  [routerLink]="['/lot-lelang']"
+                  [queryParams]="{ page: currPage + 2 }"
+                  *ngIf="currPage + 2 <= pages"
+                >
                   <span class="bi bi-chevron-right"></span>
                 </a>
               </li>

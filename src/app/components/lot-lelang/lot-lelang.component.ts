@@ -10,8 +10,10 @@ import { filter } from 'rxjs/operators';
 import { CurrencyMaskInputMode } from 'ngx-currency';
 
 // for faster development
-const GET_ALL_API = 'http://10.1.137.50:8766/getAllUser';
-const FILTER_API = 'http://10.1.137.50:8766/getAuctionObjectFilter';
+const GET_ALL_API =
+  'http://auction-object-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/getAllUser';
+const FILTER_API =
+  'http://auction-object-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/getAuctionObjectFilter';
 
 @Component({
   selector: 'app-lot-lelang',
@@ -73,7 +75,7 @@ export class LotLelangComponent implements OnInit {
   }
 
   provinceChanged() {
-    console.log(this.filterForm.value.province);
+    // console.log(this.filterForm.value.province);
     this.address.getCity(this.filterForm.value.province).subscribe((isi) => {
       this.cityData = isi;
     });
@@ -85,7 +87,7 @@ export class LotLelangComponent implements OnInit {
       .set('size', '8');
     this.http.get<any>(GET_ALL_API, { params }).subscribe(
       (isi) => {
-        console.log(isi);
+        // console.log(isi);
         this.dataAuctionObject = isi.content;
         this.totalElements = isi.totalElements;
         this.pages = Math.ceil(this.totalElements / 9);
@@ -108,7 +110,7 @@ export class LotLelangComponent implements OnInit {
       .set('size', '8');
     this.http.get<any>(FILTER_API, { params }).subscribe(
       (isi) => {
-        console.log(isi.content);
+        // console.log(isi.content);
         this.dataAuctionObject = isi.content;
         this.totalElements = isi.totalElements;
         this.pages = Math.ceil(this.totalElements / 8);

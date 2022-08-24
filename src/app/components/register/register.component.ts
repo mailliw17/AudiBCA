@@ -6,9 +6,10 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const REGISTER_API = 'http://10.1.137.50:8760/user/v1/register';
+const REGISTER_API =
+  'http://user-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/user/v1/register';
 const VERIFY_EMAIL_API =
-  'http://10.1.137.50:8080/auth/user/v1/verification-link/';
+  'http://user-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/user/v1/verification-link/';
 
 @Component({
   selector: 'app-register',

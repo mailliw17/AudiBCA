@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
-const GET_FAQ_API = 'http://10.1.137.50:8767/getAll';
+const GET_FAQ_API =
+  'http://faq-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/getAll';
 
 @Component({
   selector: 'app-faq',

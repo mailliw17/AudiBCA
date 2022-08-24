@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { Ktp } from '../components/index-profil/main-profil-ktp/ktp';
 import { TokenStorageService } from './token-storage.service';
 
-const BASE_URL = 'http://10.1.137.50:8761';
+const BASE_URL =
+  'http://ktp-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,9 @@ export class KtpService {
     const formData: FormData = new FormData();
     formData.append('file', file);
     return this.http.put<Ktp>(
-      `${BASE_URL}/addFile/ktp/${id}`, formData, this.httpOptions_base
+      `${BASE_URL}/addFile/ktp/${id}`,
+      formData,
+      this.httpOptions_base
     );
   }
 

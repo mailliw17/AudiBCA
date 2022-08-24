@@ -14,10 +14,14 @@ import { switchMap } from 'rxjs/operators';
 import { CurrencyMaskInputMode } from 'ngx-currency';
 import Swal from 'sweetalert2';
 
-const GET_AO_API = 'http://10.1.137.50:8766/get/';
-const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
-const BID_API = 'http://10.1.137.50:8768/create';
-const VERIFY_PASSWORD_API = 'http://10.1.137.50:8760/user/v1/verify-password';
+const GET_AO_API =
+  'http://auction-object-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/get/';
+const GET_BIDDING_BY_AOID_API =
+  'http://bidding-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/getByAuctionObj/';
+const BID_API =
+  'http://bidding-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/create';
+const VERIFY_PASSWORD_API =
+  'http://user-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/user/v1/verify-password';
 
 @Component({
   selector: 'app-bidding',
@@ -238,7 +242,7 @@ export class BiddingComponent implements OnInit {
 
   increaseBid() {
     console.log(this.biddingForm.get('value')?.value);
-    if(this.biddingForm.get('value')?.value === undefined) {
+    if (this.biddingForm.get('value')?.value === undefined) {
       this.biddingForm.patchValue({
         value: this.highestPrice + this.kelipatan,
       });
@@ -250,7 +254,7 @@ export class BiddingComponent implements OnInit {
   }
 
   increaseBidX10() {
-    if(this.biddingForm.get('value')?.value === undefined) {
+    if (this.biddingForm.get('value')?.value === undefined) {
       this.biddingForm.patchValue({
         value: this.highestPrice + this.kelipatan * 10,
       });
@@ -262,7 +266,7 @@ export class BiddingComponent implements OnInit {
   }
 
   decreaseBid() {
-    if(this.biddingForm.get('value')?.value === undefined) {
+    if (this.biddingForm.get('value')?.value === undefined) {
       this.biddingForm.patchValue({
         value: this.highestPrice - this.kelipatan,
       });
@@ -274,7 +278,7 @@ export class BiddingComponent implements OnInit {
   }
 
   decreaseBidX10() {
-    if(this.biddingForm.get('value')?.value === undefined) {
+    if (this.biddingForm.get('value')?.value === undefined) {
       this.biddingForm.patchValue({
         value: this.highestPrice - this.kelipatan * 10,
       });

@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import { Rekening } from '../components/index-profil/main-profil-rekening-bank/rekening';
 import { TokenStorageService } from './token-storage.service';
 
-const BASE_URL = 'http://10.1.137.50:8761';
+const BASE_URL =
+  'http://ktp-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RekeningService {
   httpOptions_base = {
@@ -21,10 +22,9 @@ export class RekeningService {
 
   getRekeningDataFromIds(accountNumber: any): Observable<any> {
     return this.http.get<any>(
-      `http://10.1.137.50:8070/ids/api/account/${accountNumber}`
+      `http://ids-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/ids/api/account/${accountNumber}`
     );
   }
-
 
   getRekeningData(userId: any): Observable<Rekening[]> {
     return this.http.get<Rekening[]>(
@@ -62,5 +62,4 @@ export class RekeningService {
       this.httpOptions_base
     );
   }
-
 }

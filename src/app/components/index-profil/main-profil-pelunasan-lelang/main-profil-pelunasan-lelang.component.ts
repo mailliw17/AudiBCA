@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const GET_VA_BY_ID_API = 'http://10.1.137.50:8772/getbyuserid/';
+const GET_VA_BY_ID_API =
+  'http://virtuall-account-service-website-lelang-bca-dev.apps.ocpdev.dti.co.id/getbyuserid/';
 
 @Component({
   selector: 'app-main-profil-pelunasan-lelang',
