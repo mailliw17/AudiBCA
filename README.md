@@ -1,12 +1,12 @@
-# Frontend Lelang - User
+# Auction Digital - BCA - User
 
-## By audiBCA - BIT19
+## By BIT19
 
 > Hope this way can make our integration come easier dude
 
 ## DO THIS FIRST !!
 
-- Type `git clone https://github.com/mailliw17/frontend-lelang.git`
+- Type `git clone https://github.com/mailliw17/AudiBCA.git`
 - Type `git branch`
   > Note: MAKE SURE ONLY MASTER BRANCH
 - Type `npm install`
