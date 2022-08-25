@@ -24,7 +24,10 @@
               </tr>
               <!-- JIKA SESI BIDDING SEDANG BERLANGSUNG -->
               <tr
-                *ngIf="dataVA.auctionobjectId?.status == 'SEDANG BERLANGSUNG'"
+                *ngIf="
+                  dataVA.auctionobjectId?.status == 'SEDANG BERLANGSUNG' &&
+                  dataVA.status == 'PAID'
+                "
               >
                 <th scope="row">Tindakan</th>
                 <td>
@@ -41,7 +44,12 @@
               <!-- EOF SESI BIDDING SEDANG BERLANGSUNG -->
 
               <!-- SESI BIDDING SUDAH SELESAI -->
-              <tr *ngIf="dataVA.auctionobjectId?.status == 'SUDAH SELESAI'">
+              <tr
+                *ngIf="
+                  dataVA.auctionobjectId?.status == 'SUDAH SELESAI' &&
+                  dataVA.status == 'PAID'
+                "
+              >
                 <th scope="row">Tindakan</th>
                 <td>
                   <button

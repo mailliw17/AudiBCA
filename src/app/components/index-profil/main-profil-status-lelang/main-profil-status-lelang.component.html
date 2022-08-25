@@ -71,5 +71,9 @@
       <h4 class="judul-bold">Waktu Mulai Lelang</h4>
       <p>{{ vad.auctionobjectId.bidStart | date: "dd-LLLL-yyyy H:mm" }}</p>
     </div>
+    <div class="col">
+      <h4 class="judul-bold">Waktu Selesai Lelang</h4>
+      <p>{{ vad.auctionobjectId.bidExpire | date: "dd-LLLL-yyyy H:mm" }}</p>
+    </div>
   </div>
 </mat-card>
